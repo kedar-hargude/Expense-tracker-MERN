@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
+
 import "./NavLinks.css";
 
 export default function NavLinks(){
@@ -11,7 +12,10 @@ export default function NavLinks(){
                 <NavLink to='/' exact='true'>Dashboard</NavLink>
             </li>
             <li>
-                <NavLink to='/expenses' >Expenses</NavLink>
+                
+                <NavLink className='icon-container' to='/expenses' >
+                    Expenses
+                </NavLink>
             </li>
             <li>
                 <NavLink to='/settings'>Settings</NavLink>

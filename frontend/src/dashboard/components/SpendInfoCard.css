@@ -1,0 +1,45 @@
+.card-container{
+    display: flex;
+    width: 18rem;
+    padding: 2rem 1.5rem;
+    background-color: var(--gray-two);
+    border-radius: 1.5rem;
+
+}
+
+.icons-container{
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-container{
+    width: 80%;
+    margin-left: 1rem;
+}
+
+.info-container__title{
+    color: var(--text-two);
+    font-size: 1.2rem;
+    margin: 0 0 0.6rem 0;
+}
+
+.info-container__value{
+    color: var(--text-one);
+    font-weight: 700;
+    font-size: 2.2rem;
+    margin: 0;
+}
+
+.inverse{
+    background-color: var(--dark);
+}
+
+.inverse .info-container__value{
+    color: var(--background-six);
+}
+
+.inverse img{
+    filter: invert(99%) sepia(57%) saturate(1905%) hue-rotate(14deg) brightness(100%) contrast(87%);
+}

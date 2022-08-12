@@ -49,6 +49,15 @@
     color: red;
 }
 
+.icon-container{
+    display: flex;
+}
+
+.icon-file{
+    width: 1rem;
+    height: 1rem;
+}
+
 @media (max-width: 500px){
 
     .nav-links{
