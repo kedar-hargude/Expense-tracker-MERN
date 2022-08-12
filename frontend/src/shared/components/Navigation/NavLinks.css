@@ -32,9 +32,9 @@
 .nav-links a:hover,
 .nav-links a:active,
 .nav-links a.active {
-    background: #C8EE44;
+    background: var(--primary-green);
     border-radius: 8px;
-    color: #1B212D;
+    color: var(--text-one);
 }
 
 .nav-links button {
@@ -45,8 +45,8 @@
 
 .nav-links button:hover,
 .nav-links button:active {
-    background: #f8df00;
-    color: #292929;
+    background: yellow;
+    color: red;
 }
 
 @media (max-width: 500px){

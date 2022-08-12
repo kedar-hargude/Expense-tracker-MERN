@@ -1,5 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+:root{
+    --primary-green: #c8ee44;
+    --secondary-green: #29a073;
+    --background-one: #fff;
+    --background-two: #fafafa;
+    --background-three: #fafafa;
+    --background-four: #e8e8e8;
+    --background-five: #f8f8f8;
+    --background-six: #fff;
+    --border-one: #f5f5f5;
+    --dark: #363a3f;
+    --dark-two: #201e34;
+    --dark-three: #282541;
+    --dark-four: #1e1c30;
+    --light: #e5e5e5;
+    --gray: #f8f8f8;
+    --gray-one: #fafafa;
+    --gray-two: #f8f8f8;
+    --text-one: #1b212d;
+    --text-two: #929eae;
+    --color-scheme: default;
+}
+
 *{
     box-sizing: border-box;
 }
@@ -32,3 +55,4 @@ body{
     opacity: 0;
     transition: all 200ms;
 }
+

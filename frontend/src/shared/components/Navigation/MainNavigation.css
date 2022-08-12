@@ -17,13 +17,9 @@
     background: black;
 }
   
-/* .main-navigation__title {
-    color: red;
-} */
-  
 .main-navigation__title a {
     text-decoration: none;
-    color: #1B212D;
+    color: var(--text-one);
 }
   
 .main-navigation__header-nav {
