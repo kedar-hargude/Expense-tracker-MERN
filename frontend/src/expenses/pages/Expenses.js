@@ -39,6 +39,14 @@ const DUMMY_EXPENSE_DATA = [
         recurring: true,
         type: 'Entertainment',
         date: '15 August, 2022' 
+    },
+    {
+        id: 23452345234523452345234523,
+        title: 'Frontend Masters subscription',
+        amount: 100,
+        recurring: true,
+        type: 'Entertainment',
+        date: '15 August, 2022' 
     }
 ];
 

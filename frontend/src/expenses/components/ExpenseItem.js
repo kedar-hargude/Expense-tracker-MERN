@@ -1,8 +1,13 @@
 import React from "react";
 
+import Button from "../../shared/components/FormElements/Button";
 import "./ExpenseItem.css";
 
 export default function ExpenseItem(props){
+
+    function editHandler(){
+        console.log(props.id);
+    }
 
     // {
     //     id: 1234123,
@@ -20,7 +25,14 @@ export default function ExpenseItem(props){
             <td className="bold">₹{props.amount}</td>
             <td className="bold">{props.date}</td>
             <td>{props.id}</td>
-            <td><button className="bold">Edit</button></td>
+            <td>
+                <Button 
+                onClick={editHandler}
+                // className="bold"
+                >
+                    <p>Edit</p>
+                </Button>
+            </td>
         </tr>
     )
 }

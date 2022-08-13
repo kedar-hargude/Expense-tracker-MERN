@@ -16,6 +16,11 @@ td{
     font-weight: 500;
 }
 
+button p{
+    margin: 0;
+    font-size: 1.2rem;
+}
+
 /* .expense__title{
     color: var(--text-one);
     font-size: 1.2rem;

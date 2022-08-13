@@ -1,0 +1,23 @@
+.button{
+    font: inherit;
+    padding: 0.5rem 1.5rem;
+    background-color: var(--primary-green);
+    color: var(--text-one);
+    cursor: pointer;
+    border: none;
+    border-radius: 1.2rem;
+}
+
+button:hover,
+button:active{
+    background-color: #a1ca0c;
+}
+
+.button:disabled,
+.button:hover:disabled,
+.button:active:disabled {
+  background: #ccc;
+  color: #979797;
+  border-color: #ccc;
+  cursor: not-allowed;
+}
