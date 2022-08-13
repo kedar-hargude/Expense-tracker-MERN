@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 
+import Button from "../../shared/components/FormElements/Button";
+import Modal from "../../shared/components/UIElements/Modal";
 import ExpenseItem from "./ExpenseItem";
 import "./ExpenseList.css";
 
 export default function ExpenseList(props){
+    const [showModal, setShowModal] = useState(false);
+
+    function openNewExpenseHandler(){
+        setShowModal(true);
+    }
+
+    function closeNewExpenseHandler(){
+        setShowModal(false);
+    }
 
     // {
     //     id: 1234123,
@@ -27,27 +38,36 @@ export default function ExpenseList(props){
 
 
     return (
-        <div className="expense-list__container">
-            <div>
-                <h3 className="center">
-                    Filter tag and search here maybe?
-                </h3>
+        <React.Fragment>
+            <Modal  
+            show={showModal}
+            onCancel={closeNewExpenseHandler}
+            header='Log new expense'
+            >
+                <p>Your form here!</p>
+            </Modal>
+            <div className="expense-list__container">
+                <div>
+                    <Button onClick={openNewExpenseHandler} >
+                        Create Expense
+                    </Button>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>NAME/BUSINESS</th>
+                            <th>TYPE</th>
+                            <th>AMOUNT</th>
+                            <th>DATE</th>
+                            <th>INVOICE ID</th>
+                            <th>ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {loadedData}
+                    </tbody>
+                </table>
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>NAME/BUSINESS</th>
-                        <th>TYPE</th>
-                        <th>AMOUNT</th>
-                        <th>DATE</th>
-                        <th>INVOICE ID</th>
-                        <th>ACTION</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {loadedData}
-                </tbody>
-            </table>
-        </div>
+        </React.Fragment>
     )
 }
