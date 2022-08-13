@@ -1,0 +1,49 @@
+
+.expense-row__container{
+    padding: 1rem;
+    margin: 1rem;
+}
+
+td{
+    text-align: center;
+    color: var(--text-two);
+    
+}
+
+.bold{
+    color: var(--text-one);
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+/* .expense__title{
+    color: var(--text-one);
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.expense__type{
+    color: var(--text-two);
+}
+
+.expense__amount{
+    color: var(--text-one);
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.expense__date{
+    color: var(--text-one);
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.expense__id{
+    color: var(--text-two);
+}
+
+.expense__edit-btn{
+    color: var(--text-one);
+    font-size: 1.2rem;
+    font-weight: 500;
+} */

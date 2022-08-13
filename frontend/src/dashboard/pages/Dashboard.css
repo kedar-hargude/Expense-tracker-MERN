@@ -1,11 +1,11 @@
 .dashboard-container{
-    margin-top: 4rem;
+    /* margin-top: 4rem; */
     border: 2px solid red;
     display: flex;
 }
 
 .dashboard-first-column{
-    height: 100vh;
+    height: 100%;
     width: 80vw;
     border: 2px solid blue;
 }

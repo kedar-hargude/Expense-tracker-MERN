@@ -1,0 +1,16 @@
+
+.expense-list__container{
+    border: 4px solid brown;
+}
+
+table{
+    width: 100%;
+}
+
+td{
+    border: 1px solid red;
+}
+
+th{
+    color: var(--text-two);
+}

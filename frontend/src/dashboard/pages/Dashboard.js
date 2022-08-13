@@ -12,7 +12,6 @@ export default function Dashboard(){
                     inverse 
                     title="Total Spending"
                     value="420.69"
-                    // not 'light'
                     />
                     <SpendInfoCard 
                     title="Monthly Spending"
