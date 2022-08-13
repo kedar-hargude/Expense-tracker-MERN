@@ -21,6 +21,14 @@ button p{
     font-size: 1.2rem;
 }
 
+@media (max-width: 500px){
+    td:nth-child(2),
+    td:nth-child(4),
+    td:nth-child(5){
+        display: none;
+    }
+}
+
 /* .expense__title{
     color: var(--text-one);
     font-size: 1.2rem;
