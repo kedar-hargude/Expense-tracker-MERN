@@ -1,0 +1,45 @@
+.form-control {
+    margin: 1rem 0;
+    font: inherit;
+}
+
+.form-control label,
+.form-control input {
+    display: block;
+}
+
+.form-control label {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.form-control input {
+    height: 38px;
+    border-radius: 10px;
+    border: 1px solid #282541;
+    padding: 10px;
+    outline: none;
+    line-height: 17px;
+    letter-spacing: 1px;
+    background: transparent;
+    color: var(--text-one);
+    
+}
+
+.form-control input:focus {
+    border: 1px solid #96c56c !important;
+}
+
+.form-control--invalid label,
+.form-control--invalid p{
+    color: red;
+}
+
+p{
+    margin: 0.5rem 0 0 0;
+}
+
+.form-control--invalid input{
+    border-color: red;
+    background-color: rgb(255, 180, 180);
+}

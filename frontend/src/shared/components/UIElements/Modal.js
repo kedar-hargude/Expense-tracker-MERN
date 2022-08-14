@@ -15,6 +15,7 @@ import "./Modal.css";
 */
 
 function ModalOverlay(props){
+
     const content=(
         <div className="modal">
             <header className="modal__header">
