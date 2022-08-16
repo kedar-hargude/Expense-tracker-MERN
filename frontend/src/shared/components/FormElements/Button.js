@@ -9,6 +9,7 @@ export default function Button(props){
             type={props.type}
             onClick={props.onClick}
             disabled={props.disabled}
+            style={{width: `${props.width}`}}
         >
             {props.children}
         </button>

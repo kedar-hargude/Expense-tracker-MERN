@@ -1,20 +1,23 @@
 import React from "react";
 
 import Input from "../../shared/components/FormElements/Input";
-import { VALIDATOR_REQUIRE } from '../../shared/utils/validators'
+import { VALIDATOR_REQUIRE } from '../../shared/utils/validators';
+import Modal from "../../shared/components/UIElements/Modal";
+import CreateExpense from "../../expenses/components/CreateExpense";
 import "./SettingsForm.css";
 
 export default function SettingsForm(props){
+
     return(
-        <div className="settings-container">
-            <Input 
-                type='text'
-                label='Name'
-                placeholder='Your name here'
-                errorText='Please enter an input'
-                validators={[VALIDATOR_REQUIRE()]}
-                width='90%'
-            />
-        </div>
+
+        <React.Fragment>
+            <Modal  
+            show={true}
+            // onCancel={closeNewExpenseHandler}
+            header='Log new expense'
+            >
+                <CreateExpense />
+            </Modal>
+        </React.Fragment>
     )
 }

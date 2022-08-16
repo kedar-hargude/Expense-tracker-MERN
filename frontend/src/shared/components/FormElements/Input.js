@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 
 import { validate } from "../../utils/validators";
 import "./Input.css";
@@ -10,7 +10,7 @@ import "./Input.css";
         label="Name"
         placeholder='name here'
         errorText='Please enter correct input'
-        validators=([{type: 'require'}, {type: 'min-length',value: 5}])
+        validators={[{type: 'require'}, {type: 'min-length',value: 5}]}
         width='100%'
     }
 */
@@ -37,9 +37,16 @@ export default function Input(props){
 
     const [inputState, dispatch] = useReducer(inputReducer, {
         value: '',
-        isValid: false,
-        isTouched: false
-    })
+        isTouched: false,
+        isValid: false
+    });
+
+    const { id, onInput } = props;
+    const { value, isValid } = inputState;
+
+    useEffect(() => {
+        onInput(id, value, isValid);
+    }, [id, value, isValid, onInput]);
 
     function changeHandler(event){
         dispatch({
@@ -51,24 +58,24 @@ export default function Input(props){
 
     function touchHandler(){
         dispatch({
-            type: 'TOUCH',
-            isTouched: true
+            type: 'TOUCH'
         })
     }
 
     return (
         <div className={`form-control ${!inputState.isValid && inputState.isTouched && 'form-control--invalid'}`}>
             <label htmlFor={props.id}>{props.label}</label>
-            <input 
+            <input
+                id={props.id}
                 type={props.type} 
                 placeholder={props.placeholder}
                 onChange={changeHandler}
-                value={inputState.value}
                 onBlur={touchHandler}
+                value={inputState.value}
                 style={{width: `${props.width}`}}
             />
             {!inputState.isValid && inputState.isTouched && 
-                <p className="error">{props.errorText}</p>}
+                <p>{props.errorText}</p>}
         </div>
     )
 }
