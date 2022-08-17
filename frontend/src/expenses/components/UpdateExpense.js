@@ -39,7 +39,6 @@ export default function UpdateExpense(props){
     const [isLoading, setIsLoading] = useState(true);
     
 
-
     const [formState, inputHandler, toggleHandler, setInitialFormData] = useForm({
         title: {
             value: '',
@@ -181,11 +180,17 @@ export default function UpdateExpense(props){
                     onChange={toggleHandler}
                 />
             </div>
-            <Button 
-                type='submit'
-                width='100%'
-                disabled={!formState.isValid}
-            > Update </Button>
+            <div className="btn-container">
+                <div
+                    className="delete-btn center"
+                    onClick={props.showDeleteWarningHandler}
+                >Delete</div>
+                <Button 
+                    type='submit'
+                    width='100%'
+                    disabled={!formState.isValid}
+                > Update </Button>
+            </div>
         </form>
     )
 }

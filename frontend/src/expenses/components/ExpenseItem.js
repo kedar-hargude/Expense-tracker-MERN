@@ -8,6 +8,7 @@ import "./ExpenseItem.css";
 export default function ExpenseItem(props){
 
     const [showModal, setShowModal] = useState(false);
+    const [showDeleteConfirmModal, setShowDeleteConfirmModal] = useState(false);
 
     function openUpdateExpenseHandler(){
         setShowModal(true);
@@ -21,9 +22,24 @@ export default function ExpenseItem(props){
         setShowModal(false);
     }
 
-    function editHandler(){
-        // console.log(props.id);
-        openUpdateExpenseHandler();
+    // function editHandler(){
+    //     // console.log(props.id);
+    //     openUpdateExpenseHandler();
+    // }
+
+    function showDeleteWarningHandler(){
+        setShowModal(false);
+        setShowDeleteConfirmModal(true);
+    }
+
+    function closeDeleteWarningHandler(){
+        setShowDeleteConfirmModal(false);
+    }
+
+    function confirmDeleteHandler(){
+        {console.log(`Deleting id:${props.id}...`)}
+        setShowDeleteConfirmModal(false);
+        // TODO delete request to backend
     }
 
     // {
@@ -45,7 +61,23 @@ export default function ExpenseItem(props){
                 <UpdateExpense
                     id={props.id}
                     handleFormSubmit={updateExpenseSubmitHandler}
+                    showDeleteWarningHandler={showDeleteWarningHandler}
                 />
+            </Modal>
+
+            <Modal
+                show={showDeleteConfirmModal}
+                onCancel={closeDeleteWarningHandler}
+                header='Are you sure?'
+            >
+                <p>...to delete expense titled: <span className="big">{`${props.title}`}</span>, costing ₹<span className="big">{`${props.amount}`}</span>
+                </p>
+                <div className="confirm-delete-btn-container">
+                    <Button 
+                        onClick={confirmDeleteHandler}
+                        danger
+                    >Confirm</Button> 
+                </div>
             </Modal>
 
             <tr className="expense-row__container">
@@ -56,7 +88,7 @@ export default function ExpenseItem(props){
             <td>{props.id}</td>
             <td>
                 <Button 
-                onClick={editHandler}
+                    onClick={openUpdateExpenseHandler}
                 // className="bold"
                 >
                     <p>Edit</p>

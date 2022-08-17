@@ -34,3 +34,33 @@ input[type='checkbox'] {
     width: 1.5rem;
     accent-color: var(--primary-green);
 }
+
+.btn-container{
+    display: flex;
+    gap: 1rem;
+}
+
+.delete-btn{
+    width: 100%;
+    background: #db0000;
+    border-color: #db0000;
+    color: white;
+    cursor: pointer;
+    border-radius: 1.2rem;
+}
+
+.delete-btn:hover,
+.delete-btn:active{
+    background: #f34343;
+    border-color: #f34343; 
+}
+
+.confirm-delete-btn-container{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.big{
+    font-size: 1rem;
+    font-weight: 700;
+}

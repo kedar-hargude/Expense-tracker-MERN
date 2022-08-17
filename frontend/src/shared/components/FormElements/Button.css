@@ -13,6 +13,18 @@ button:active{
     background-color: #a1ca0c;
 }
 
+.button--danger{
+    background: #db0000;
+    border-color: #db0000;
+    color: white;
+}
+
+.button--danger:hover,
+.button--danger:active{
+    background: #f34343;
+    border-color: #f34343;    
+}
+
 .button:disabled,
 .button:hover:disabled,
 .button:active:disabled {
