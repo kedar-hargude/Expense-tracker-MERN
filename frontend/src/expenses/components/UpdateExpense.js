@@ -1,4 +1,4 @@
-import React, {useReducer , useCallback } from "react";
+import React from "react";
 
 import Input from "../../shared/components/FormElements/Input";
 import Button from "../../shared/components/FormElements/Button";
@@ -77,7 +77,7 @@ export default function UpdateExpense(props){
     function handleFormSubmit(event){
         event.preventDefault();
         console.log(formState);
-        // props.handleFormSubmit(); // to close the modal
+        props.handleFormSubmit(); // to close the modal
         // TODO post request to backend
     }
 

@@ -17,7 +17,7 @@ import ExpenseList from "../components/ExpenseList";
                 amount: 1000,
                 recurring: false,
                 type: 'Mobile',
-                date: '15 August, 2022'
+                date: '2022-08-15'
             }
         ]
     }
@@ -30,7 +30,7 @@ const DUMMY_EXPENSE_DATA = [
         amount: 1000,
         recurring: false,
         type: 'Mobile',
-        date: '15 August, 2022'
+        date: '2022-08-15'
     },
     {
         id: 23462456,
@@ -38,7 +38,7 @@ const DUMMY_EXPENSE_DATA = [
         amount: 100,
         recurring: true,
         type: 'Entertainment',
-        date: '15 August, 2022' 
+        date: '2022-08-15' 
     },
     {
         id: 23452345234523452345234523,
@@ -46,7 +46,7 @@ const DUMMY_EXPENSE_DATA = [
         amount: 100,
         recurring: true,
         type: 'Entertainment',
-        date: '15 August, 2022' 
+        date: '2022-08-15' 
     }
 ];
 

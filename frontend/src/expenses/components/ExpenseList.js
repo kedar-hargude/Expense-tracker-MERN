@@ -27,7 +27,7 @@ export default function ExpenseList(props){
     //     amount: 1000,
     //     recurring: false,
     //     type: 'Mobile',
-    //     date: '15 August, 2022'
+    //     date: '2022-08-15'
     // }
 
     const loadedData = props.items.map(item => (
