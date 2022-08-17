@@ -3,7 +3,7 @@ import React, { useCallback, useReducer } from "react";
 import Input from "../../shared/components/FormElements/Input";
 import { VALIDATOR_REQUIRE } from "../../shared/utils/validators";
 import Button from "../../shared/components/FormElements/Button";
-import "./CreateExpense.css";
+import "./ExpenseForm.css";
 
 /*
     Title , amount , type , date , recurring... Add button
@@ -93,8 +93,7 @@ export default function CreateExpense(props){
         })
     }, []);
 
-    function toggleHandler (event){
-        // console.log(event.target.checked)
+    const toggleHandler = (event) => {
         dispatch ({
             type: 'TOGGLE_CHANGE',
             toggleValue: event.target.checked
