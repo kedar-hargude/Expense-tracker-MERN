@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import Input from "../../shared/components/FormElements/Input";
 import Button from "../../shared/components/FormElements/Button";
@@ -36,35 +36,67 @@ const DUMMY_EXPENSE_DATA = [
 
 // pass on the id to the UpdateExpense props...pass on value as a number in an object
 export default function UpdateExpense(props){
+    const [isLoading, setIsLoading] = useState(true);
+    
 
-    const identifiedExpense = DUMMY_EXPENSE_DATA.find(ele => ele.id === props.id);
 
-
-    const [formState, inputHandler, toggleHandler] = useForm({
+    const [formState, inputHandler, toggleHandler, setInitialFormData] = useForm({
         title: {
-            value: identifiedExpense.title,
-            isValid: true
+            value: '',
+            isValid: false
         },
         amount: {
-            value: identifiedExpense.amount,
-            isValid: true
+            value: '',
+            isValid: false
         },
         type: {
-            value: identifiedExpense.type,
-            isValid: true
+            value: '',
+            isValid: false
         },
         date: {
-            value: identifiedExpense.date,
-            isValid: true
+            value: '',
+            isValid: false
         },
         recurring: {
-            isRecurring: identifiedExpense.recurring,
+            isRecurring: false,
             isValid: true
         }
     }, 
-    true
+    false
     );
 
+
+    const identifiedExpense = DUMMY_EXPENSE_DATA.find(ele => ele.id === props.id);
+
+    useEffect(()=> {
+        if(identifiedExpense){
+            setInitialFormData({
+                title: {
+                    value: identifiedExpense.title,
+                    isValid: true
+                },
+                amount: {
+                    value: identifiedExpense.amount,
+                    isValid: true
+                },
+                type: {
+                    value: identifiedExpense.type,
+                    isValid: true
+                },
+                date: {
+                    value: identifiedExpense.date,
+                    isValid: true
+                },
+                recurring: {
+                    isRecurring: identifiedExpense.recurring,
+                    isValid: true
+                }
+            }, 
+            true);
+        }
+
+        setIsLoading(false);
+    }, [setInitialFormData, identifiedExpense])
 
     if(!identifiedExpense){
         return(
@@ -74,7 +106,15 @@ export default function UpdateExpense(props){
         )
     }
 
-    function handleFormSubmit(event){
+    if(isLoading){
+        return (
+            <div className="center">
+                <h2>Loading...</h2>
+            </div>
+        )
+    }
+
+    function expenseUpdateFormSubmit(event){
         event.preventDefault();
         console.log(formState);
         props.handleFormSubmit(); // to close the modal
@@ -83,7 +123,7 @@ export default function UpdateExpense(props){
 
 
     return (
-        <form className="place-form" onSubmit={handleFormSubmit}>
+        <form className="place-form" onSubmit={expenseUpdateFormSubmit}>
             <Input 
                 id='title'
                 type='text'

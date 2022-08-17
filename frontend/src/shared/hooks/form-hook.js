@@ -25,7 +25,7 @@ function formReducer(state, action){
                 },
                 isValid: formIsValid
             }
-        case 'TOGGLE_CHANGE':{
+        case 'TOGGLE_CHANGE': {
             return {
                 ...state,
                 inputs: {
@@ -35,6 +35,12 @@ function formReducer(state, action){
                         isValid: true
                     }
                 }
+            }
+        }
+        case 'SET_INITIAL_FORM_DATA': {
+            return {
+                inputs: action.inputs,
+                isValid: action.formIsValid
             }
         }
         default:
@@ -66,6 +72,14 @@ export default function useForm(initialInputs, initialFormValidity){
         })
     };
 
-    return [formState, inputHandler, toggleHandler];
+    const setInitialFormData = useCallback((inputData, formValidity) => {
+        dispatch({
+            type: 'SET_INITIAL_FORM_DATA',
+            inputs: inputData,
+            formIsValid: formValidity
+        })
+    }, []);
+
+    return [formState, inputHandler, toggleHandler, setInitialFormData];
 
 }
