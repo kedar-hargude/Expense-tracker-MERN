@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Button from "../../shared/components/FormElements/Button";
 import Modal from "../../shared/components/UIElements/Modal";
 import ExpenseItem from "./ExpenseItem";
+import CreateExpense from "./CreateExpense";
 import "./ExpenseList.css";
 
 export default function ExpenseList(props){
@@ -13,6 +14,10 @@ export default function ExpenseList(props){
     }
 
     function closeNewExpenseHandler(){
+        setShowModal(false);
+    }
+
+    function createExpenseSubmitHandler(){
         setShowModal(false);
     }
 
@@ -44,8 +49,11 @@ export default function ExpenseList(props){
             onCancel={closeNewExpenseHandler}
             header='Log new expense'
             >
-                <p>Your form here!</p>
+                <CreateExpense
+                    handleFormSubmit={createExpenseSubmitHandler}
+                />
             </Modal>
+            
             <div className="expense-list__container">
                 <div>
                     <Button onClick={openNewExpenseHandler} >

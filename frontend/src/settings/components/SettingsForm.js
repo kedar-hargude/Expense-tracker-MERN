@@ -1,7 +1,5 @@
 import React from "react";
 
-import Input from "../../shared/components/FormElements/Input";
-import { VALIDATOR_REQUIRE } from '../../shared/utils/validators';
 import Modal from "../../shared/components/UIElements/Modal";
 import CreateExpense from "../../expenses/components/CreateExpense";
 import "./SettingsForm.css";

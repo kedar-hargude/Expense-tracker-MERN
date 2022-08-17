@@ -10,6 +10,7 @@ import "./CreateExpense.css";
 */
 
 function formReducer(state, action){
+
     switch (action.type){
         case 'INPUT_CHANGE':
             let formIsValid = true;
@@ -52,7 +53,7 @@ function formReducer(state, action){
 }
 
 
-export default function CreateExpense(){
+export default function CreateExpense(props){
 
     const [formState, dispatch] = useReducer(formReducer, {
         inputs: {
@@ -103,6 +104,8 @@ export default function CreateExpense(){
     function handleFormSubmit(event){
         event.preventDefault();
         console.log(formState);
+        props.handleFormSubmit();
+        // TODO post request to backend
     }
 
 
