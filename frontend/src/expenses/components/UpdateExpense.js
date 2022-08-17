@@ -3,6 +3,7 @@ import React, {useReducer , useCallback } from "react";
 import Input from "../../shared/components/FormElements/Input";
 import Button from "../../shared/components/FormElements/Button";
 import { VALIDATOR_REQUIRE } from "../../shared/utils/validators";
+import useForm from "../../shared/hooks/form-hook";
 import "./ExpenseForm.css";
 
 
@@ -38,6 +39,33 @@ export default function UpdateExpense(props){
 
     const identifiedExpense = DUMMY_EXPENSE_DATA.find(ele => ele.id === props.id);
 
+
+    const [formState, inputHandler, toggleHandler] = useForm({
+        title: {
+            value: identifiedExpense.title,
+            isValid: true
+        },
+        amount: {
+            value: identifiedExpense.amount,
+            isValid: true
+        },
+        type: {
+            value: identifiedExpense.type,
+            isValid: true
+        },
+        date: {
+            value: identifiedExpense.date,
+            isValid: true
+        },
+        recurring: {
+            isRecurring: identifiedExpense.recurring,
+            isValid: true
+        }
+    }, 
+    true
+    );
+
+
     if(!identifiedExpense){
         return(
             <div className="center">
@@ -46,9 +74,16 @@ export default function UpdateExpense(props){
         )
     }
 
+    function handleFormSubmit(event){
+        event.preventDefault();
+        console.log(formState);
+        // props.handleFormSubmit(); // to close the modal
+        // TODO post request to backend
+    }
+
 
     return (
-        <form className="place-form">
+        <form className="place-form" onSubmit={handleFormSubmit}>
             <Input 
                 id='title'
                 type='text'
@@ -57,9 +92,9 @@ export default function UpdateExpense(props){
                 errorText='Please enter a title'
                 validators={[VALIDATOR_REQUIRE()]}
                 width='100%'
-                onInput={()=> {}}
-                initialValue={identifiedExpense.title}
-                initialIsValid={true}
+                onInput={inputHandler}
+                initialValue={formState.inputs.title.value}
+                initialIsValid={formState.inputs.title.isValid}
                 />
             <Input 
                 id='amount'
@@ -69,9 +104,9 @@ export default function UpdateExpense(props){
                 errorText='Please enter a valid number'
                 validators={[VALIDATOR_REQUIRE()]}
                 width='100%'
-                onInput={()=> {}}
-                initialValue={identifiedExpense.amount}
-                initialIsValid={true}
+                onInput={inputHandler}
+                initialValue={formState.inputs.amount.value}
+                initialIsValid={formState.inputs.amount.isValid}
             />
             <Input 
                 id='type'
@@ -81,9 +116,9 @@ export default function UpdateExpense(props){
                 errorText='Please enter a valid number'
                 validators={[VALIDATOR_REQUIRE()]}
                 width='100%'
-                onInput={()=> {}}
-                initialValue={identifiedExpense.type}
-                initialIsValid={true}
+                onInput={inputHandler}
+                initialValue={formState.inputs.type.value}
+                initialIsValid={formState.inputs.type.isValid}
             />
             <Input 
                 id='date'
@@ -93,23 +128,23 @@ export default function UpdateExpense(props){
                 errorText='Please enter a valid date'
                 validators={[VALIDATOR_REQUIRE()]}
                 width='100%'
-                onInput={()=> {}}
-                initialValue={identifiedExpense.date}
-                //date in yyyy-mm-dd
-                initialIsValid={true}
+                onInput={inputHandler}
+                initialValue={formState.inputs.date.value}
+                initialIsValid={formState.inputs.date.isValid}
             />
             <div className="recurring-container">
                 <label htmlFor="recurring">Recurring  </label>
                 <input 
                     id='recurring' 
-                    type='checkbox' 
-                    checked={identifiedExpense.recurring}
+                    type='checkbox'
+                    checked={formState.inputs.recurring.isRecurring}
+                    onChange={toggleHandler}
                 />
             </div>
             <Button 
                 type='submit'
                 width='100%'
-                disabled={true}
+                disabled={!formState.isValid}
             > Update </Button>
         </form>
     )

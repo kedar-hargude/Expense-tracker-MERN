@@ -1,104 +1,46 @@
-import React, { useCallback, useReducer } from "react";
+import React from "react";
 
 import Input from "../../shared/components/FormElements/Input";
 import { VALIDATOR_REQUIRE } from "../../shared/utils/validators";
 import Button from "../../shared/components/FormElements/Button";
+import useForm from "../../shared/hooks/form-hook";
 import "./ExpenseForm.css";
 
 /*
     Title , amount , type , date , recurring... Add button
 */
 
-function formReducer(state, action){
-
-    switch (action.type){
-        case 'INPUT_CHANGE':
-            let formIsValid = true;
-            for (const inputId in state.inputs){
-                if(!state.inputs[inputId]){
-                    continue;
-                }
-                if(inputId === action.inputId){
-                    formIsValid = formIsValid && action.isValid;
-                } else {
-                    formIsValid = formIsValid && state.inputs[inputId].isValid;
-                }
-            }
-            return {
-                ...state,
-                inputs: {
-                    ...state.inputs,
-                    [action.inputId] : {
-                        value: action.value,
-                        isValid: action.isValid
-                    }
-                },
-                isValid: formIsValid
-            }
-        case 'TOGGLE_CHANGE':{
-            return {
-                ...state,
-                inputs: {
-                    ...state.inputs,
-                    recurring: {
-                        isRecurring: action.toggleValue,
-                        isValid: true
-                    }
-                }
-            }
-        }
-        default:
-            return state
-    }
-}
 
 
 export default function CreateExpense(props){
 
-    const [formState, dispatch] = useReducer(formReducer, {
-        inputs: {
-            title: {
-                value: '',
-                isValid: false
-            },
-            amount: {
-                value: '',
-                isValid: false
-            },
-            type: {
-                value: '',
-                isValid: false
-            },
-            date: {
-                value: '',
-                isValid: false
-            },
-            recurring: {
-                isRecurring: false,
-                isValid: true
-            }
+    const [formState, inputHandler, toggleHandler] = useForm({
+        title: {
+            value: '',
+            isValid: false
         },
-        isValid: false
-    })
+        amount: {
+            value: '',
+            isValid: false
+        },
+        type: {
+            value: '',
+            isValid: false
+        },
+        date: {
+            value: '',
+            isValid: false
+        },
+        recurring: {
+            isRecurring: false,
+            isValid: true
+        }
+    }, 
+    false
+    );
 
 
     
-
-    const inputHandler = useCallback((id, value, isValid) => {
-        dispatch({ 
-            type: 'INPUT_CHANGE', 
-            inputId: id, 
-            value: value,
-            isValid: isValid
-        })
-    }, []);
-
-    const toggleHandler = (event) => {
-        dispatch ({
-            type: 'TOGGLE_CHANGE',
-            toggleValue: event.target.checked
-        })
-    }
 
     function handleFormSubmit(event){
         event.preventDefault();
