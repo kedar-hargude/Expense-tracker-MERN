@@ -5,13 +5,17 @@ import "./Input.css";
 
 /*
     props: {
-        id
+        id='name of the input(not a number id)'
         type='text'/'password'/'email'
         label="Name"
         placeholder='name here'
         errorText='Please enter correct input'
         validators={[{type: 'require'}, {type: 'min-length',value: 5}]}
         width='100%'
+        onInput={() => {}}  //...this is compulsory
+        initialValue={give initial name}
+        initialIsValid={whether that component is true or false}
+
     }
 */
 

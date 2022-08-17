@@ -1,4 +1,43 @@
 
-.settings-container{
-    border: 2px solid blue;
+.settings-form__container{
+    border: 3px solid blue;
+    padding: 3rem;
+}
+
+.settings-form__container > h2{
+    margin: 0;
+}
+
+.inputs-container{
+    display: flex;
+    gap: 2vw;
+    /* border: 2px solid red; */
+}
+
+input{
+    width: 50vw;
+}
+
+.error{
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: red;
+}
+
+.success{
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: green;
+}
+
+@media (max-width: 500px){
+    .settings-form__container{
+        padding: 0rem;
+        width: 80vw;
+        margin-left: 10vw;
+    } 
+
+    .inputs-container{
+        display: block;
+    }
 }

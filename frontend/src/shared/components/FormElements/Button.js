@@ -8,6 +8,7 @@ export default function Button(props){
             className={`button 
             ${props.danger && 'button--danger'}
             ${props.plain && 'button--plain'}
+            ${props.green && 'button--green center'}
             `}
             type={props.type}
             onClick={props.onClick}
