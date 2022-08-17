@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import Input from "../../shared/components/FormElements/Input";
-import { VALIDATOR_REQUIRE } from "../../shared/utils/validators";
+import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH, VALIDATOR_EMAIL } from "../../shared/utils/validators";
 import Button from "../../shared/components/FormElements/Button";
 import useForm from "../../shared/hooks/form-hook";
 import "./SettingsForm.css";
@@ -130,7 +130,18 @@ export default function SettingsForm(props){
         }
         console.log(formState);
         //TODO submit info to backend
-        console.log('Updating info....heheheee!')
+        console.log('Updating info....heheheee!');
+        // setInitialFormData({
+        //     ...formState.inputs,
+        //     password: {
+        //         value: '',
+        //         isValid: false
+        //     },
+        //     confirmPassword: {
+        //         value: '',
+        //         isValid: false
+        //     }
+        // }, false)
         setSuccessMessage(true);
     }
 
@@ -180,7 +191,7 @@ export default function SettingsForm(props){
                     type='number'
                     label='Mobile Number'
                     errorText='Please enter your 10 digit mobile number'
-                    validators={[VALIDATOR_REQUIRE()]}
+                    validators={[VALIDATOR_MINLENGTH(9)]}
                     onInput={() => {}}
                     width='40vw'
                     initialValue={formState.inputs.mobileNumber.value}
@@ -192,7 +203,7 @@ export default function SettingsForm(props){
                 type='email'
                 label='Email'
                 errorText='Please enter a valid email id'
-                validators={[VALIDATOR_REQUIRE()]}
+                validators={[VALIDATOR_EMAIL()]}
                 onInput={inputHandler}
                 width='82vw'
                 initialValue={formState.inputs.email.value}
@@ -204,7 +215,7 @@ export default function SettingsForm(props){
                     type='password'
                     label='Password'
                     errorText='Please enter a password greater than 5 digits'
-                    validators={[VALIDATOR_REQUIRE()]}
+                    validators={[VALIDATOR_MINLENGTH(5)]}
                     onInput={inputHandler}
                     width='40vw'
                     // initialValue={DUMMY_USER_DATA.password}
@@ -215,7 +226,7 @@ export default function SettingsForm(props){
                     type='password'
                     label='Confirm Password'
                     errorText='Please enter a password greater than 5 digits'
-                    validators={[VALIDATOR_REQUIRE()]}
+                    validators={[VALIDATOR_MINLENGTH(5)]}
                     onInput={inputHandler}
                     width='40vw'
                     // initialValue={DUMMY_USER_DATA.password}
