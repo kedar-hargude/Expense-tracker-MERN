@@ -233,7 +233,8 @@ export default function SettingsForm(props){
                     initialIsValid={false}
                 />   
            </div>
-
+           {successMessage && <p className="success">Info Successfully updated!</p>}
+            {passwordError && <p className="error">Ensure that both passwords are same!</p>}
            <Button 
                     type='submit'
                     onClick={settingsFormSubmitHandler}
@@ -243,8 +244,7 @@ export default function SettingsForm(props){
                     // width='12%'
                 >Update
             </Button>
-            {successMessage && <p className="success">Info Successfully updated!</p>}
-            {passwordError && <p className="error">Ensure that both passwords are same!</p>}
+            
         </form>
     )
 }
