@@ -2,6 +2,7 @@
 .settings-form__container{
     border: 3px solid blue;
     padding: 3rem;
+    height: calc(100vh - 4rem);
 }
 
 .settings-form__container > h2{
@@ -35,6 +36,7 @@ input{
         padding: 0rem;
         width: 80vw;
         margin-left: 10vw;
+        height: 100%;
     } 
 
     .inputs-container{

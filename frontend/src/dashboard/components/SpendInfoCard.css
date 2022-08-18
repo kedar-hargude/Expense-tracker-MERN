@@ -2,7 +2,7 @@
     display: flex;
     width: 18rem;
     padding: 2rem 1.5rem;
-    background-color: var(--gray-two);
+    background-color: var(--background-three);
     border-radius: 1.5rem;
 
 }
@@ -36,8 +36,9 @@
     background-color: var(--dark);
 }
 
+
 .inverse .info-container__value{
-    color: var(--background-six);
+    color: var(--light);
 }
 
 .inverse img{

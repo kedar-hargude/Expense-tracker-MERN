@@ -1,3 +1,8 @@
 main{
     margin-top: 4rem;
 }
+
+.app-container{
+    color: var(--text-one);
+    background-color: var(--background-one);
+}

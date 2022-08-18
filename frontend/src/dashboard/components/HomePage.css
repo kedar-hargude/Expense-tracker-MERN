@@ -1,6 +1,10 @@
 
 .home--container{
     padding: 3rem;
+    color: var(--text-one);
+    background-color: var(--background-one);
+    border: 2px solid red;
+    height: calc(100vh - 4rem);
 }
 
 .home--container > h1{

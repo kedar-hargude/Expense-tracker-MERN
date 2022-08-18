@@ -7,11 +7,13 @@ import Expenses from './expenses/pages/Expenses';
 import Settings from './settings/pages/Settings';
 import Auth from './user/pages/Auth';
 import { MyAuthContext } from './shared/context/auth-context';
+import { DarkThemeContext } from './shared/context/darkTheme-context';
 import './App.css';
 
 export default function App() {
 
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [isLoggedIn, setIsLoggedIn] = useState(true); //TODO change to false
+	const [isDarkMode, setIsDarkMode] = useState(false);
 
 	const login = useCallback(() => {
 		setIsLoggedIn(true);
@@ -19,6 +21,10 @@ export default function App() {
 
 	const logout = useCallback(() => {
 		setIsLoggedIn(false);
+	}, []);
+
+	const darkThemeToggle = useCallback(() => {
+		setIsDarkMode(prevState => !prevState);
 	}, []);
 
 	let routes;
@@ -46,15 +52,17 @@ export default function App() {
 
 	return(
 		<MyAuthContext.Provider value={{isLoggedIn, login, logout}}>
-			<React.Fragment>
-				<MainNavigation />
-					<main>
-						<Routes>
-							<Route path='/' element={<Dashboard />} />
-							{routes}
-						</Routes>
-					</main>
-			</React.Fragment>
+			<DarkThemeContext.Provider value={{isDarkMode,darkThemeToggle}}>
+				<div className={`app-container ${isDarkMode && 'dark'}`}>
+					<MainNavigation />
+						<main>
+							<Routes>
+								<Route path='/' element={<Dashboard />} />
+								{routes}
+							</Routes>
+						</main>
+				</div>
+			</DarkThemeContext.Provider>
 		</MyAuthContext.Provider>
 	)
 }

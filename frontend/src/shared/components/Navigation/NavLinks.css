@@ -27,6 +27,7 @@
     text-decoration: none;
     padding: 0.8rem 1rem;
     width: 100%;
+    font-weight: 600;
 }
 
 .nav-links a:hover,
@@ -34,7 +35,7 @@
 .nav-links a.active {
     background: var(--primary-green);
     border-radius: 8px;
-    color: var(--text-one);
+    color: #1B212D;
 }
 
 .nav-links button {

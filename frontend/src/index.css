@@ -65,4 +65,17 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.dark {
+    --text-one: #fff;
+    --background-one: #1c1a2e;
+    --background-two: #1e1c30;
+    --background-three: #201e34;
+    --background-four: #292642;
+    --dark: #282541;
+    --background-five: #282541;
+    --background-six: #1b212d;
+    --border-one: #282541;
+    --color-scheme: dark;
   }
