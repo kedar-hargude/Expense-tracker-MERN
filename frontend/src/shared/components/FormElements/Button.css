@@ -33,6 +33,16 @@ button:active{
     font-weight: 500;
 }
 
+.button--plain{
+    background-color: var(--background-one);
+    color: var(--text-one);
+    border: var(--primary-green) 1px solid;
+}
+
+.button--bold{
+    font-weight: 700;
+}
+
 .button:disabled,
 .button:hover:disabled,
 .button:active:disabled {

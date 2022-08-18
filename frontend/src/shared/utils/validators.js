@@ -21,7 +21,7 @@ export function validate(value, validators){
             return isValid && value.trim().length > validator.val;
         }
         if (validator.type === 'EMAIL') {
-            isValid = isValid && /^\S+@\S+\.\S+$/.test(value);
+            return isValid = isValid && /^\S+@\S+\.\S+$/.test(value);
         }
     }
 }

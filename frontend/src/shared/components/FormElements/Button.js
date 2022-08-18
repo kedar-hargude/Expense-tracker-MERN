@@ -9,6 +9,7 @@ export default function Button(props){
             ${props.danger && 'button--danger'}
             ${props.plain && 'button--plain'}
             ${props.green && 'button--green center'}
+            ${props.bold && 'button--bold'}
             `}
             type={props.type}
             onClick={props.onClick}

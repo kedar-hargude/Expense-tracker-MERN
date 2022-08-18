@@ -12,13 +12,15 @@ export default function NavLinks(){
                 <NavLink to='/' exact='true'>Dashboard</NavLink>
             </li>
             <li>
-                
                 <NavLink className='icon-container' to='/expenses' >
                     Expenses
                 </NavLink>
             </li>
             <li>
                 <NavLink to='/settings'>Settings</NavLink>
+            </li>
+            <li>
+                <NavLink to='/auth'>Authenticate</NavLink>
             </li>
         </ul>
     )
