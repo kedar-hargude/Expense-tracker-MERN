@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import Input from "../../shared/components/FormElements/Input";
 import Button from "../../shared/components/FormElements/Button";
 import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from "../../shared/utils/validators"
 import useForm from "../../shared/hooks/form-hook";
+import { MyAuthContext } from "../../shared/context/auth-context";
 import "./Auth.css";
 
 export default function Auth(){
 
-    const [isLoginMode, setIsLoginMode] = useState(true);
+    const auth = useContext(MyAuthContext);
+
+    const [isLoginMode, setIsLoginMode] = useState(false);
 
     const [formState, inputHandler, , setInitialFormData] = useForm({
         email: {
@@ -44,6 +47,8 @@ export default function Auth(){
     function authSubmitHandler(event){
         event.preventDefault();
         console.log(formState.inputs);
+        auth.login();
+        //TODO submit to backend, and different for login and signup
     }
 
 

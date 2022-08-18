@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import SpendInfoCard from "../components/SpendInfoCard";
+import { MyAuthContext } from "../../shared/context/auth-context";
+import Modal from "../../shared/components/UIElements/Modal";
+import HomePage from "../components/HomePage";
 import "./Dashboard.css"
 
 export default function Dashboard(){
+
+    const auth = useContext(MyAuthContext);
+
+    if(!auth.isLoggedIn){
+        return(
+            <HomePage />
+        )
+    }
+
     return (
         <div className="dashboard-container">
             <div className="dashboard-first-column">

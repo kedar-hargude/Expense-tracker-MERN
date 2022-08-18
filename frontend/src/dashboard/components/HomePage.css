@@ -1,0 +1,35 @@
+
+.home--container{
+    padding: 3rem;
+}
+
+.home--container > h1{
+    font-size: 4rem;
+}
+
+.home--container > p{
+    font-size: 2rem;
+}
+
+.mobile{
+    display: none;
+}
+
+@media (max-width: 768px){
+
+    .home--container{
+        padding: 1.5rem;
+    }
+
+    .home--container > h1{
+        font-size: 3.5rem;
+    }
+
+    .mobile{
+        display: block;
+    }
+
+    .desktop{
+        display: none;
+    }
+}
