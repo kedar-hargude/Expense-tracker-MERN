@@ -6,7 +6,7 @@ import Dashboard from './dashboard/pages/Dashboard';
 import Expenses from './expenses/pages/Expenses';
 import Settings from './settings/pages/Settings';
 import Auth from './user/pages/Auth';
-import { MyAuthContext } from './shared/context/auth-context';
+import { MyAuthContext } from './shared/context/auth.context';
 import { DarkThemeContext } from './shared/context/darkTheme-context';
 import './App.css';
 

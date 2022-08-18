@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import DarkModeToggle from 'react-dark-mode-toggle';
 
-import { MyAuthContext } from "../../context/auth-context";
+import { MyAuthContext } from "../../context/auth.context";
 import { DarkThemeContext } from "../../context/darkTheme-context";
 import Button from "../FormElements/Button";
 import "./NavLinks.css";

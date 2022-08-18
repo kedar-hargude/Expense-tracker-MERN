@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 
 import SpendInfoCard from "../components/SpendInfoCard";
-import { MyAuthContext } from "../../shared/context/auth-context";
-import Modal from "../../shared/components/UIElements/Modal";
+import { MyAuthContext } from "../../shared/context/auth.context";
 import HomePage from "../components/HomePage";
 import "./Dashboard.css"
 
