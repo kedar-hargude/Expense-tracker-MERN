@@ -8,28 +8,28 @@ module.exports = [
         "password": "abcd123",
         "expenses": [
             {
-                id: 1234123,
-                title: "Mobile phone",
-                amount: 1000,
-                recurring: false,
-                type: "Mobile",
-                date: "2022-08-15"
+                "_id": "12341223",
+                "title": "Mobile phone",
+                "amount": 1000,
+                "recurring": false,
+                "type": "Mobile",
+                "date": "2022-08-15"
             },
             {
-                id: 23462456,
-                title: "Scrimba subscription",
-                amount: 100,
-                recurring: true,
-                type: "Entertainment",
-                date: "2022-08-15" 
+                "_id": "234624256",
+                "title": "Scrimba subscription",
+                "amount": 100,
+                "recurring": true,
+                "type": "Entertainment",
+                "date": "2022-08-15" 
             },
             {
-                id: 2345234523452345245345,
-                title: "Frontend Masters subscription",
-                amount: 100,
-                recurring: true,
-                type: "Entertainment",
-                date: "2022-08-15" 
+                "_id": "0s16WXPlBv9KpWra5gNH4",
+                "title": "Frontend Masters subscription",
+                "amount": 100,
+                "recurring": true,
+                "type": "Entertainment",
+                "date": "2022-08-15" 
             }
         ]
     },
@@ -43,28 +43,28 @@ module.exports = [
         "password": "Cupertino",
         "expenses": [
             {
-                id: 1234123,
-                title: "I-phone",
-                amount: 50000,
-                recurring: false,
-                type: "Mobile",
-                date: "2022-08-15"
+                "_id": "12332454123",
+                "title": "I-phone",
+                "amount": 50000,
+                "recurring": false,
+                "type": "Mobile",
+                "date": "2022-08-15"
             },
             {
-                id: 23462456,
-                title: "Scrimba subscription",
-                amount: 100,
-                recurring: true,
-                type: "Entertainment",
-                date: "2022-08-15" 
+                "_id": "223453462456",
+                "title": "Scrimba subscription",
+                "amount": 100,
+                "recurring": true,
+                "type": "Entertainment",
+                "date": "2022-08-15" 
             },
             {
-                id: 2345234523452345245345,
-                title: "Frontend Masters subscription",
-                amount: 100,
-                recurring: true,
-                type: "Entertainment",
-                date: "2022-08-15" 
+                "_id": "0s16WXPlBv9KpWra5gNH4",
+                "title": "Frontend Masters subscription",
+                "amount": 100,
+                "recurring": true,
+                "type": "Entertainment",
+                "date": "2022-08-15" 
             }
         ]
     }

@@ -1,0 +1,1 @@
+const userData = require('../DUMMY_DATA');
