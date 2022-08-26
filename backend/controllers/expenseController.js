@@ -29,10 +29,25 @@ exports.checkExpenseId = (req, res, next) => {
 };
 
 // get all expenses of an individual. userId is provided
-exports.getAllExpenses = (req, res) => {
+exports.getFullUserInfo = async (req, res, next) => {
+
+    const { userId } = req.body;
+
+    let foundUser;
+    try{
+        foundUser = await User.findById(userId);
+    } catch(err){
+        console.log(err);
+        return next(new CustomError(500, 'Internal error: Unable to find user. Please try again later'));
+    }
+
+    if(!foundUser){
+        return next(new CustomError(404, 'Invalid userId passed. No user exists.'));
+    }
+
     res.status(200).json({
         status: 'success',
-        data: userData
+        data: foundUser
     })
 };
 
@@ -96,7 +111,9 @@ exports.updateExpense = async (req, res) => {
         return next(new CustomError(500, 'Could not find user. Please try again.'));
     }
 
-    console.log(foundUser);
+    if(!foundUser){
+        return next(new CustomError(404, 'Invalid userId passed. No user exists.'));
+    }
 
     const foundExpense = foundUser.expenses.id(expenseId);
 
@@ -144,6 +161,11 @@ exports.deleteExpense = async (req, res) => {
         console.log(err);
         return next(new CustomError(500, 'Could not find user. Please try again.'));
     }
+
+    if(!foundUser){
+        return next(new CustomError(404, 'Invalid userId passed. No user exists.'));
+    }
+
     const foundExpense = foundUser.expenses.id(expenseId);
     foundExpense.remove();      //removing the user
 
