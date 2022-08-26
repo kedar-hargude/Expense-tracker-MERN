@@ -107,9 +107,10 @@ exports.updateUserInfo = async (req, res, next) => {
     });
 }
 
-exports.deleteUser = (req, res) => {
-    res.status(500).json({
-        status: 'error',
-        message: 'This route is not yet defined! Will delete the user later'
-    })
-}
+// // will do this later
+// exports.deleteUser = (req, res) => {
+//     res.status(500).json({
+//         status: 'error',
+//         message: 'This route is not yet defined! Will delete the user later'
+//     })
+// }

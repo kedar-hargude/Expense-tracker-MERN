@@ -13,7 +13,7 @@ router.post('/login', userController.logIn);
 // maybe check if the SAME user is logged in before
 router.put('/update', userController.updateUserInfo);
 
-// user 'id' passed as input
-router.delete('/delete', userController.deleteUser);
+// // user 'id' passed as input
+// router.delete('/delete', userController.deleteUser);
 
 module.exports = router;
