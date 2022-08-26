@@ -40,29 +40,34 @@ exports.signUp = async (req, res, next) => {
 
     res.status(201).json({
         status: 'success', 
-        message: `Dummy user ${req.body.name} signed up!`,
+        message: `User ${req.body.name} signed up!`,
         document: newUserDoc
     });
 };
 
-exports.logIn = (req, res) => {
-    const findUser = userData.find(ele => ele.email === req.body.email);
-    if(!findUser){
-        res.status(404).json({ 
-            status: 'error', 
-            message: 'No user email id registered. Please sign up.'
-        })
-    } else if (findUser.password !== req.body.password){
-        res.status(404).json({ 
-            status: 'error', 
-            message: 'Wrong user password.'
-        })
-    } else {
-        res.status(200).json({ 
-            status: 'success', 
-            message: `Dummy user ${findUser.name} logged in!`
+// email, password given
+exports.logIn = async (req, res, next) => {
+    
+    const {email, password} = req.body;
+    let existingUser;
+    try{
+        existingUser = await User.findOne({email: email});
+    } catch(err){
+        console.log(err);
+        return next(new CustomError(500, 'Could not verify details. Please try again later.'))
+    }
+
+    if(!existingUser || existingUser.password !== password){
+        return res.status(400).json({
+            status: 'error',
+            message: 'Invalid Credentials, could not log you in.'
         })
     }
+
+    res.status(200).json({
+        status: 'success',
+        message: `User ${existingUser.name} is logged in.`
+    })
 };
 
 exports.updateUserInfo = (req, res) => {
