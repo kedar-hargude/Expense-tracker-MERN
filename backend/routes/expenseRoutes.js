@@ -3,22 +3,23 @@ const userData = require('../DUMMY_DATA');
 const expenseController = require('../controllers/expenseController');
 const { nanoid } = require('nanoid');
 
+const { userIdCheck, getAllExpenses, checkExpenseId, checkFullRequestBody, addExpense, updateExpense, deleteExpense } = expenseController;
+
 // middleware to check whether every request has a userId.
-router.use(expenseController.userIdCheck);
+router.use(userIdCheck);
 
-//TODO delete, temporary to get all expense values
-router.get('/', expenseController.getAllExpenses);
+// 'userId', which is the id of the user must be compulsorily passed to all requests 
 
+//Get all expense values of a specific userId. only userId is passed
+router.post('/', getAllExpenses);
 
-// 'userId', which is the id of the user must be compulsorily passed to all requests
-router.post('/add', expenseController.checkFullRequestBody,
-        expenseController.addExpense);
+// userId, title, amount, reccuring, type, date passed
+router.post('/add', checkFullRequestBody, addExpense);
 
-// expenseId is passed to every request after this
-router.put('/update', expenseController.checkExpenseId, 
-        expenseController.checkFullRequestBody, expenseController.updateExpense);
+// userId, "expenseId", title, amount, reccuring, type, date passed
+router.put('/update', checkExpenseId, checkFullRequestBody, updateExpense);
 
-router.delete('/delete', expenseController.checkExpenseId,
-        expenseController.deleteExpense);
+// userId, expenseId passed
+router.delete('/delete', checkExpenseId, deleteExpense);
 
 module.exports = router;

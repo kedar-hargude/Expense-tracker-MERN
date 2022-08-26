@@ -1,17 +1,32 @@
 const userData = require('../DUMMY_DATA');
+const CustomError = require('../models/custom-error');
 
+//check if userId exists
 exports.userIdCheck = (req, res, next) => {
-    //check if userId exists
     const foundUser = userData.find(ele => ele._id === req.body.userId);
     if(!req.body.userId || !foundUser){
-        return res.status(404).json({
-            status: 'error',
-            message: 'Invalid userId'
-        })
+        return next(new CustomError(404, 'Invalid userId passed'));
     }
     next();
 };
 
+// check if all the parameters are passed in the body
+exports.checkFullRequestBody = (req, res, next) => {
+    if (!req.body.title || !req.body.amount || !req.body.recurring || !req.body.type || !req.body.date){
+        return next(new CustomError(404, 'Incomplete credentials given'));
+    }
+    next();
+}; 
+
+// check if expenseId to be updated/deleted is passed
+exports.checkExpenseId = (req, res, next) => {
+    if(!req.body.expenseId){
+        return next(new CustomError(404, 'Expense Id not passed'));
+    }
+    next();
+};
+
+// get all expenses of an individual. userId is provided
 exports.getAllExpenses = (req, res) => {
     res.status(200).json({
         status: 'success',
@@ -19,26 +34,8 @@ exports.getAllExpenses = (req, res) => {
     })
 };
 
-exports.checkFullRequestBody = (req, res, next) => {
-    if (!req.body.title || !req.body.amount || !req.body.recurring || !req.body.type || !req.body.date){
-        return res.status(404).json({
-            status: 'error',
-            message: 'Incomplete credentials'
-        })
-    }
-    next();
-}; 
 
-exports.checkExpenseId = (req, res, next) => {
-    if(!req.body.expenseId){
-        return res.status(404).json({
-            status: 'error',
-            message: 'Expense Id not passed'
-        })
-    }
-    next();
-};
-
+// add a new expense
 exports.addExpense = (req, res) => {
     const foundUser = userData.find(ele => ele._id === req.body.userId);
     // const newExpense = Object.assign({_id: nanoid()}, req.body);
