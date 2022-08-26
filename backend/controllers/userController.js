@@ -1,4 +1,5 @@
-const userData = require('../DUMMY_DATA');
+const User = require('../models/userModel');
+const CustomError = require('../models/custom-error')
 
 // check email and password of incoming req.body
 // exports.checkEmailPasswordMiddleware = (req, res, next) => {
@@ -9,20 +10,38 @@ const userData = require('../DUMMY_DATA');
 //     next();
 // };
 
-exports.signUp = (req, res) => {
+
+// name, email, password given
+exports.signUp = async (req, res, next) => {
+
+    const {name, email, password} = req.body;
 
     // check if user email already exists
-    const checkUser = userData.find(ele => ele.email === req.body.email);
-    if(checkUser){
-        return res.status(409).json({ 
-            status: 'error', 
-            message: 'User email already exists. Please log in.' 
-        })
+    let existingUser;
+    try{
+        existingUser = await User.findOne({ email: email });
+    } catch(err){
+        console.log(err);
+        const error = new CustomError(500, 'Unable to find if email already exists. Please try again later');
+        return next(error);
+    }
+
+    if(existingUser){
+        return next(new CustomError(400, 'User already exists. Enter different email.'));
+    }
+
+    let newUserDoc;
+    try{
+        newUserDoc = await User.create(req.body);
+    } catch(err){
+        console.log(err);
+        return next(new CustomError(500, 'Adding user failed. Please try again later'));
     }
 
     res.status(201).json({
         status: 'success', 
-        message: `Dummy user ${req.body.name} signed up!`
+        message: `Dummy user ${req.body.name} signed up!`,
+        document: newUserDoc
     });
 };
 
