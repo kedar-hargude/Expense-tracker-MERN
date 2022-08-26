@@ -2,13 +2,12 @@ const User = require('../models/userModel');
 const CustomError = require('../models/custom-error')
 
 // check email and password of incoming req.body
-// exports.checkEmailPasswordMiddleware = (req, res, next) => {
-//     console.log(req.body);
-//     if(!req.body.email || !req.body.password){
-//         return res.status(404).json({status: 'error', message: 'Incomplete credentials entered'})
-//     }
-//     next();
-// };
+exports.checkEmailPasswordMiddleware = (req, res, next) => {
+    if(!req.body.email || !req.body.password){
+        return next(new CustomError(404, 'Invalid credentials entered.'));
+    }
+    next();
+};
 
 
 // name, email, password given
