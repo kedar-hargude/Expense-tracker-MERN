@@ -40,7 +40,7 @@ exports.signUp = async (req, res, next) => {
     res.status(201).json({
         status: 'success', 
         message: `User ${req.body.name} signed up!`,
-        document: newUserDoc
+        userData: newUserDoc
     });
 };
 
@@ -66,6 +66,7 @@ exports.logIn = async (req, res, next) => {
     res.status(200).json({
         status: 'success',
         message: `User ${existingUser.name} is logged in.`
+        // userData: existingUser.toObject({getters:true}) //TODO think about whether to apply getter to everyone...it just returns an id, doesn't store it in the database.
     })
 };
 
@@ -102,7 +103,7 @@ exports.updateUserInfo = async (req, res, next) => {
     res.status(200).json({
         status: 'success',
         message: 'Updated the user',
-        user: updatedUser
+        userData: updatedUser
     });
 }
 

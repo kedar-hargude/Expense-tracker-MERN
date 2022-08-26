@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const userData = require('../DUMMY_DATA');
 const expenseController = require('../controllers/expenseController');
 const { nanoid } = require('nanoid');
 

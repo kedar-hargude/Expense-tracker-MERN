@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 
+const User = require('./userModel');
 
 const expenseSchema = mongoose.Schema({
+    // expenseId: {
+    //     type: String
+    // },
     title: {
         type: String,
         required: [true, 'Expense requires a title']
@@ -28,20 +32,3 @@ const Expense = mongoose.model('Expense', expenseSchema);
 
 module.exports.expenseSchema = expenseSchema;
 module.exports.Expense = Expense;
-
-
-/*
-
-User.findById(userId, function(err, resultUser) =>
-
-working add expense >>
-const newExpense = new Expense ({...all values})
-resultUser.expenses.push(newExpense);
-resultUser.save();
-
-working delete expense >>
-resultUser.expenses = resultUser.expenses.filter(ele => ele.id !== expenseId);
-resultUser.save();
-
-
-*/
