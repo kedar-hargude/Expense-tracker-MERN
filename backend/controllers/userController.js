@@ -94,7 +94,7 @@ exports.updateUserInfo = async (req, res, next) => {
     try{
         updatedUser = await User.findByIdAndUpdate(userId, {
             name, lastName, mobileNumber, email, password
-        }, { runValidators: true })
+        }, { runValidators: true, new: true })
     } catch(err){
         console.log(err);
         return next(new CustomError(500, 'Fetching user failed. Please try again later.'));

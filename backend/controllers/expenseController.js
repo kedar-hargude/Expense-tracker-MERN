@@ -55,9 +55,12 @@ exports.getFullUserInfo = async (req, res, next) => {
 // add a new expense
 exports.addExpense = async (req, res, next) => {
     
+    const userId = req.body.userId;
+
     let foundUser;
     try{
-        foundUser = await User.findOne({id: req.userId});
+        foundUser = await User.findById(userId);
+        // foundUser = await User.findOne({id: req.userId});
     } catch(err){
         console.log(err);
         return next(new CustomError(500, 'Internal error: Unable to find user. Please try again later'));
@@ -94,7 +97,7 @@ exports.addExpense = async (req, res, next) => {
 
     res.status(201).json({
         status: 'success',
-        message: `New expense of ${req.body.title} created.`,
+        message: `New expense of '${req.body.title}' created.`,
         expense: newExpense
     });
 };
@@ -167,7 +170,13 @@ exports.deleteExpense = async (req, res) => {
     }
 
     const foundExpense = foundUser.expenses.id(expenseId);
-    foundExpense.remove();      //removing the user
+
+    if(!foundExpense){
+        return next(new CustomError(404, 'Invalid expenseId passed. No expense exists.'));
+    }
+
+    foundExpense.remove();      //removing the expense
+    //TODO check for the wrong expense id path, whether this is async
 
     try{
         foundUser.save();
