@@ -11,11 +11,15 @@
 
 .modal__header {
     width: 100%;
-    padding: 1rem 0.5rem;
+    padding: 0.5rem;
 }
 
 .modal__content {
     padding: 1rem 0.5rem;
+}
+
+.modal__header > h2{
+  margin: 0.5rem;
 }
 
 .modal-enter {

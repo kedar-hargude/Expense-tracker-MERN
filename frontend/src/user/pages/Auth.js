@@ -2,6 +2,8 @@ import React, { useState, useContext } from "react";
 
 import Input from "../../shared/components/FormElements/Input";
 import Button from "../../shared/components/FormElements/Button";
+import ErrorModal from "../../shared/components/UIElements/ErrorModal";
+import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from "../../shared/utils/validators"
 import useForm from "../../shared/hooks/form-hook";
 import { MyAuthContext } from "../../shared/context/auth.context";
@@ -12,6 +14,8 @@ export default function Auth(){
     const auth = useContext(MyAuthContext);
 
     const [isLoginMode, setIsLoginMode] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState();
 
     const [formState, inputHandler, , setInitialFormData] = useForm({
         email: {
@@ -53,6 +57,7 @@ export default function Auth(){
         } else {
 
             try{
+                setIsLoading(true);
                 const response = await fetch('http://localhost:5000/api/v1/users/signup', {
                     method: 'POST',
                     headers: {
@@ -66,96 +71,111 @@ export default function Auth(){
                 });
                 
                 const responseData = await response.json();
+                if(!response.ok){
+                    throw new Error(responseData.message);
+                }
+
                 console.log(responseData);
+                setIsLoading(false);
+                auth.login();
 
             } catch(err){
                 console.log(err);
+                setIsLoading(false);
+                setError(err.message || 'Something went wrong. Please try again later.');
             }
             
         }
 
         
 
-        auth.login();
+        
         //TODO submit to backend, and different for login and signup
     }
 
+    function errorHandler(){
+        setError(null);
+    }
 
     return (
-        <div className="authentication--container">
-            <div className="authentication-form--container">
-                <form onSubmit={authSubmitHandler}>
-                    <h2 className="center">
-                        {isLoginMode ? 'Welcome Back!' : 'Create a new account'}
-                    </h2>
-                    <p className="center">Please enter your details</p>
+        <React.Fragment>
+            <ErrorModal error={error} onClear={errorHandler} />
+            <div className="authentication--container">
+                {isLoading && <LoadingSpinner asOverlay />}
+                <div className="authentication-form--container">
+                    <form onSubmit={authSubmitHandler}>
+                        <h2 className="center">
+                            {isLoginMode ? 'Welcome Back!' : 'Create a new account'}
+                        </h2>
+                        <p className="center">Please enter your details</p>
 
 
-                    {!isLoginMode && (
+                        {!isLoginMode && (
+                            <div className="center">
+                                <Input 
+                                    id='name' 
+                                    type='text' 
+                                    label='Your Name' 
+                                    validators={[VALIDATOR_REQUIRE()]} 
+                                    errorText="Please enter a name"
+                                    onInput={inputHandler}
+                                    width='40vw'
+                                />
+                            </div>
+                        )}
                         <div className="center">
                             <Input 
-                                id='name' 
-                                type='text' 
-                                label='Your Name' 
-                                validators={[VALIDATOR_REQUIRE()]} 
-                                errorText="Please enter a name"
+                                id='email' 
+                                type='email'
+                                label='E-Mail'
+                                validators={[VALIDATOR_EMAIL()]}
+                                errorText="Please enter a valid email"
+                                onInput={inputHandler}
+                                width='40vw'
+                                initialIsValid={false}
+                            />
+                        </div>
+
+                        <div className="center">
+                            <Input
+                                id='password'
+                                type='password'
+                                label='Password'
+                                validators={[VALIDATOR_MINLENGTH(5)]}
+                                errorText='Password greater than 5 characters!'
                                 onInput={inputHandler}
                                 width='40vw'
                             />
                         </div>
-                    )}
-                    <div className="center">
-                        <Input 
-                            id='email' 
-                            type='email'
-                            label='E-Mail'
-                            validators={[VALIDATOR_EMAIL()]}
-                            errorText="Please enter a valid email"
-                            onInput={inputHandler}
-                            width='40vw'
-                            initialIsValid={false}
-                        />
-                    </div>
 
-                    <div className="center">
-                        <Input
-                            id='password'
-                            type='password'
-                            label='Password'
-                            validators={[VALIDATOR_MINLENGTH(5)]}
-                            errorText='Password greater than 5 characters!'
-                            onInput={inputHandler}
-                            width='40vw'
-                        />
-                    </div>
+                        <div className="center">
+                            <Button 
+                            type="submit" 
+                            disabled={!formState.isValid}
+                            bold
+                            >
+                                {isLoginMode ? 'LOGIN' : 'SignUp'}
+                            </Button>
+                        </div>
+                        
 
-                    <div className="center">
+
+                    </form>
+
+                    {/* <hr /> */}
+                    <div className="switch center">
                         <Button 
-                        type="submit" 
-                        disabled={!formState.isValid}
-                        bold
+                        plain 
+                        onClick={switchModeHandler}
                         >
-                            {isLoginMode ? 'LOGIN' : 'SignUp'}
+                            SWITCH TO {isLoginMode? 'SIGNUP': 'LOGIN'}
                         </Button>
                     </div>
-                    
-
-
-                </form>
-
-                {/* <hr /> */}
-                <div className="switch center">
-                    <Button 
-                    plain 
-                    onClick={switchModeHandler}
-                    >
-                        SWITCH TO {isLoginMode? 'SIGNUP': 'LOGIN'}
-                    </Button>
                 </div>
-            </div>
 
-            
-            <div className="image--container"></div>
-        </div>
+                
+                <div className="image--container"></div>
+            </div>
+        </React.Fragment>
     )
 }
