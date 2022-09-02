@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
+const cors = require('cors');
+
 const userRouter = require('./routes/userRoutes');
 const expenseRouter = require('./routes/expenseRoutes');
 const CustomError = require('./models/custom-error');
@@ -10,6 +12,17 @@ if(process.env.NODE_ENV === 'development'){
 }
 
 app.use(express.json());
+
+// handling CORS errors
+app.use(cors());
+
+// app.use((req, res, next) => {
+//     res.setHeader('Access-Control-Allow-Origin', '*');
+//     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+//     req.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE')
+
+//     next();
+// })
 
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/expenses', expenseRouter);
