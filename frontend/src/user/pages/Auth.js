@@ -6,6 +6,7 @@ import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from "../../shared/utils/validators"
 import useForm from "../../shared/hooks/form-hook";
+import useCustomFetch from "../../shared/hooks/fetch-hook";
 import { MyAuthContext } from "../../shared/context/auth.context";
 import "./Auth.css";
 
@@ -14,8 +15,7 @@ export default function Auth(){
     const auth = useContext(MyAuthContext);
 
     const [isLoginMode, setIsLoginMode] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState();
+    const {isLoading, error, sendRequest, clearError} = useCustomFetch();
 
     const [formState, inputHandler, , setInitialFormData] = useForm({
         email: {
@@ -51,75 +51,57 @@ export default function Auth(){
     const authSubmitHandler = async (event) => {
         event.preventDefault();
 
-        setIsLoading(true);
+        // setIsLoading(true);
 
         if(isLoginMode){
             // loggin existing user
             try{
-                const response = await fetch('http://localhost:5000/api/v1/users/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
+                await sendRequest(
+                    'http://localhost:5000/api/v1/users/login', 
+                    'POST', 
+                    JSON.stringify({
                         email: formState.inputs.email.value,
                         password: formState.inputs.password.value
-                    })
-                });
+                    }),
+                    {
+                    'Content-Type': 'application/json'
+                    }
+                );
                 
-                const responseData = await response.json();
-                if(!response.ok){
-                    throw new Error(responseData.message);
-                }
-
-                setIsLoading(false);
                 auth.login();
-
             } catch(err){
-                setIsLoading(false);
-                setError(err.message || 'Something went wrong. Please try again later.');
+                // empty purposefully, setError already set in custom hook
             }
 
         } else {
             // signing a new user:
             try{
-                const response = await fetch('http://localhost:5000/api/v1/users/signup', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
+                await sendRequest(
+                    'http://localhost:5000/api/v1/users/signup', 
+                    'POST',
+                    JSON.stringify({
                         name: formState.inputs.name.value,
                         email: formState.inputs.email.value,
                         password: formState.inputs.password.value
-                    })
-                });
+                    }), 
+                    {
+                        'Content-Type': 'application/json'
+                    }
+                );
                 
-                const responseData = await response.json();
-                if(!response.ok){
-                    throw new Error(responseData.message);
-                }
-
-                setIsLoading(false);
                 auth.login();
 
-            } catch(err){
-                setIsLoading(false);
-                setError(err.message || 'Something went wrong. Please try again later.');
-            }
+            } catch(err){}
             
         }
         
         //TODO submit to backend, and different for login and signup
     }
 
-    function errorHandler(){
-        setError(null);
-    }
 
     return (
         <React.Fragment>
-            <ErrorModal error={error} onClear={errorHandler} />
+            <ErrorModal error={error} onClear={clearError} />
             <div className="authentication--container">
                 {isLoading && <LoadingSpinner asOverlay />}
                 <div className="authentication-form--container">

@@ -5,53 +5,42 @@ import { MyAuthContext } from "../../shared/context/auth.context";
 import HomePage from "../components/HomePage";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
+import useCustomFetch from "../../shared/hooks/fetch-hook";
 import "./Dashboard.css"
 
 export default function Dashboard(){
 
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState();
+    // const [isLoading, setIsLoading] = useState(false);
+    // const [error, setError] = useState();
+    const {isLoading, error, sendRequest, clearError} = useCustomFetch();
     const [loadedUserData, setLoadedUserData] = useState();
 
     const auth = useContext(MyAuthContext);
-
     
-
-    
-    let totalExpenditure = 0;
     useEffect(() => {
         (async () => {
-            setIsLoading(true);
             try{
-                const response = await fetch('http://localhost:5000/api/v1/expenses', {
-                    method: 'POST',
-                    body: JSON.stringify({
+                const responseData = await sendRequest(
+                    'http://localhost:5000/api/v1/expenses', 
+                    'POST',
+                    JSON.stringify({
                         userId: "6308af341cfd923ada3dbc4a"
                     }),
-                    headers: {
+                    {
                         'Content-Type': 'application/json'
                     }
-                });
-                const responseData = await response.json();
-                if(!response.ok){
-                    throw new Error(responseData.message);
-                }
-
+                );
+                console.log('inside')
                 setLoadedUserData(responseData);
-                console.log(responseData);
-                // console.log('loaded inside: ' + loadedUserData);
-                // setIsLoading(false);
                 
-            } catch(err){
-                setError(err.message);
-                // setIsLoading(false);
-            }   
-          
-            setIsLoading(false);
+            } catch(err){}
+
         })();
-    }, []);
+    }, [sendRequest]);
 
     // TODO spendcard calculation data to be added here
+    let totalExpenditure = 0;
+    
     if(loadedUserData){
         // console.log('Outside')
         loadedUserData.data.expenses.forEach(expense => {
@@ -59,9 +48,6 @@ export default function Dashboard(){
         });
     }
 
-    function errorHandler(){
-        setError(null);
-    }
 
     if(!auth.isLoggedIn){
         return(
@@ -71,7 +57,7 @@ export default function Dashboard(){
 
     return (
         <React.Fragment>
-            <ErrorModal error={error} onClear={errorHandler} />
+            <ErrorModal error={error} onClear={clearError} />
             {!isLoading && loadedUserData && <div className="dashboard-container">
             {isLoading && <LoadingSpinner asOverlay />}
                 <div className="dashboard-first-column">
