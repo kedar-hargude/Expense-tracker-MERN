@@ -6,6 +6,16 @@ exports.checkEmailPasswordMiddleware = (req, res, next) => {
     if(!req.body.email || !req.body.password){
         return next(new CustomError(404, 'Invalid credentials entered.'));
     }
+
+    if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(req.body.email) === false){
+        return next(new CustomError(404, 'Invalid email entered.'));
+    }
+    
+    if(req.body.password.length < 6){
+        return next(new CustomError(404, 'Password should be minimum 6 characters long.'));
+        //TODO check password length in frontend
+    }
+
     next();
 };
 
@@ -14,6 +24,10 @@ exports.checkEmailPasswordMiddleware = (req, res, next) => {
 exports.signUp = async (req, res, next) => {
 
     const {name, email, password} = req.body;
+
+    if(!name){
+        return next(new CustomError(404, 'Please enter a username.'));
+    }
 
     // check if user email already exists
     let existingUser;
