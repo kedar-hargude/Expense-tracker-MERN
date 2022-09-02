@@ -24,7 +24,7 @@
     background: transparent;
     color: var(--text-one);
     font-size: 1.1rem;
-    
+    margin: auto;
 }
 
 .form-control input:focus {
