@@ -50,7 +50,6 @@ export default function Auth(){
 
     const authSubmitHandler = async (event) => {
         event.preventDefault();
-        console.log(formState.inputs);
 
         setIsLoading(true);
 
