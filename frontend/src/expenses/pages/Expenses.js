@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import ExpenseList from "../components/ExpenseList";
+import useCustomFetch from "../../shared/hooks/fetch-hook";
+import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
+import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 
 /* dummy individual database info:
 
@@ -52,8 +55,43 @@ const DUMMY_EXPENSE_DATA = [
 
 export default function Expense(){
     const items = DUMMY_EXPENSE_DATA;
+    const {isLoading, error, sendRequest, clearError} = useCustomFetch();
+    const [loadedUserData, setLoadedUserData] = useState();
+
+    useEffect(() => {
+        (async () => {
+            try{
+                const responseData = await sendRequest(
+                    'http://localhost:5000/api/v1/expenses', 
+                    'POST',
+                    JSON.stringify({
+                        userId: "6308af341cfd923ada3dbc4a"
+                    }),
+                    {
+                        'Content-Type': 'application/json'
+                    }
+                );
+                console.log(responseData)
+                setLoadedUserData(responseData);
+                
+            } catch(err){}
+
+        })();
+    }, []);
+
+    // const items = [];
+    // if(loadedUserData){
+    //     items = loadedUserData.data.expenses.map(expense => ({
+    //         ...expense,
+    //         date: expense.date.toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})
+    //     }))
+    // }
 
     return (
-        <ExpenseList items={items} />
+        <React.Fragment>
+            <ErrorModal error={error} onClear={clearError} />
+            {isLoading && <LoadingSpinner asOverlay />}
+            {!isLoading && loadedUserData && <ExpenseList items={items} />}
+        </React.Fragment>
     )
 }

@@ -10,8 +10,6 @@ import "./Dashboard.css"
 
 export default function Dashboard(){
 
-    // const [isLoading, setIsLoading] = useState(false);
-    // const [error, setError] = useState();
     const {isLoading, error, sendRequest, clearError} = useCustomFetch();
     const [loadedUserData, setLoadedUserData] = useState();
 
