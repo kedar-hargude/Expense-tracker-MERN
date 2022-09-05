@@ -47,7 +47,7 @@ exports.getFullUserInfo = async (req, res, next) => {
 
     res.status(200).json({
         status: 'success',
-        data: foundUser.toObject({getters: true})
+        userData: foundUser.toObject({getters: true})
     })
 };
 

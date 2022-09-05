@@ -17,10 +17,6 @@ export default function ExpenseList(props){
         setShowModal(false);
     }
 
-    function createExpenseSubmitHandler(){
-        setShowModal(false);
-    }
-
     // {
     //     id: 1234123,
     //     title: 'Mobile phone',
@@ -50,7 +46,8 @@ export default function ExpenseList(props){
             header='Log new expense'
             >
                 <CreateExpense
-                    handleFormSubmit={createExpenseSubmitHandler}
+                    handleFormSubmit={closeNewExpenseHandler}
+                    sendRequest={props.sendRequest}
                 />
             </Modal>
             

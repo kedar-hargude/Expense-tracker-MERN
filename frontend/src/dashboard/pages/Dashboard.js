@@ -30,7 +30,6 @@ export default function Dashboard(){
                 );
                 console.log('inside')
                 setLoadedUserData(responseData);
-                
             } catch(err){}
 
         })();
@@ -40,8 +39,9 @@ export default function Dashboard(){
     let totalExpenditure = 0;
     
     if(loadedUserData){
-        // console.log('Outside')
-        loadedUserData.data.expenses.forEach(expense => {
+        console.log('Outside')
+        console.log(loadedUserData);
+        loadedUserData.userData.expenses.forEach(expense => {
             totalExpenditure += expense.amount;
         });
     }

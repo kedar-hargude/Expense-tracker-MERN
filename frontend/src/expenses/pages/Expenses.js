@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 import ExpenseList from "../components/ExpenseList";
 import useCustomFetch from "../../shared/hooks/fetch-hook";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
+import { MyAuthContext } from "../../shared/context/auth.context";
 
 /* dummy individual database info:
 
@@ -54,6 +55,9 @@ const DUMMY_EXPENSE_DATA = [
 ];
 
 export default function Expense(){
+
+    const auth = useContext(MyAuthContext);
+
     const items = DUMMY_EXPENSE_DATA;
     const {isLoading, error, sendRequest, clearError} = useCustomFetch();
     const [loadedUserData, setLoadedUserData] = useState();
@@ -65,7 +69,7 @@ export default function Expense(){
                     'http://localhost:5000/api/v1/expenses', 
                     'POST',
                     JSON.stringify({
-                        userId: "6308af341cfd923ada3dbc4a"
+                        userId: auth.userId
                     }),
                     {
                         'Content-Type': 'application/json'
@@ -92,7 +96,12 @@ export default function Expense(){
         <React.Fragment>
             <ErrorModal error={error} onClear={clearError} />
             {isLoading && <LoadingSpinner asOverlay />}
-            {!isLoading && loadedUserData && <ExpenseList items={items} />}
+            {!isLoading && loadedUserData && 
+                <ExpenseList 
+                    items={items}
+                    sendRequest={sendRequest}
+                />
+            }
         </React.Fragment>
     )
 }
