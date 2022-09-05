@@ -4,7 +4,6 @@ import Input from "../../shared/components/FormElements/Input";
 import { VALIDATOR_REQUIRE } from "../../shared/utils/validators";
 import Button from "../../shared/components/FormElements/Button";
 import useForm from "../../shared/hooks/form-hook";
-import useCustomFetch from "../../shared/hooks/fetch-hook";
 import { MyAuthContext } from "../../shared/context/auth.context";
 import "./ExpenseForm.css";
 
@@ -17,7 +16,6 @@ import "./ExpenseForm.css";
 export default function CreateExpense(props){
 
     const auth = useContext(MyAuthContext);
-    const {isLoading, error, sendRequest, clearError} = useCustomFetch();
 
     const [formState, inputHandler, toggleHandler] = useForm({
         title: {
@@ -58,7 +56,7 @@ export default function CreateExpense(props){
 
     function handleFormSubmit(event){
         event.preventDefault();
-        console.log(formState);
+        // console.log(formState);
         // TODO post request to backend
         
         (async() => {

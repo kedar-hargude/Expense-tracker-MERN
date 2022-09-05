@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import Button from "../../shared/components/FormElements/Button";
 import Modal from "../../shared/components/UIElements/Modal";
 import UpdateExpense from "./UpdateExpense";
+import useCustomFetch from "../../shared/hooks/fetch-hook";
+import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
+import ErrorModal from "../../shared/components/UIElements/ErrorModal";
+import { MyAuthContext } from "../../shared/context/auth.context";
 import "./ExpenseItem.css";
 
 export default function ExpenseItem(props){
 
     const [showModal, setShowModal] = useState(false);
     const [showDeleteConfirmModal, setShowDeleteConfirmModal] = useState(false);
+
+    const {isLoading, error, sendRequest, clearError} = useCustomFetch();
+    const auth = useContext(MyAuthContext);
 
     function openUpdateExpenseHandler(){
         setShowModal(true);
@@ -36,10 +43,25 @@ export default function ExpenseItem(props){
         setShowDeleteConfirmModal(false);
     }
 
-    function confirmDeleteHandler(){
-        {console.log(`Deleting id:${props.id}...`)}
+    async function confirmDeleteHandler(){
+        // {console.log(`Deleting id:${props.id}...`)}
         setShowDeleteConfirmModal(false);
         // TODO delete request to backend
+        try{
+            await sendRequest(
+                'http://localhost:5000/api/v1/expenses/delete',
+                'DELETE',
+                JSON.stringify({
+                    userId: auth.userId,
+                    expenseId: props.id
+                }),
+                {
+                    'Content-Type': 'application/json'
+                }
+            )
+        } catch(err){}
+
+        props.reloadPage();
     }
 
     // {
@@ -53,6 +75,9 @@ export default function ExpenseItem(props){
 
     return(
         <React.Fragment>
+            <ErrorModal error={error} onClear={clearError} />
+            {isLoading && <LoadingSpinner asOverlay />}
+
             <Modal  
             show={showModal}
             onCancel={closeUpdateExpenseHandler}
@@ -82,7 +107,7 @@ export default function ExpenseItem(props){
                 </div>
             </Modal>
 
-            <tr className="expense-row__container">
+            {!isLoading && <tr className="expense-row__container">
             <td className="bold">{props.title}</td>
             <td>{props.type}</td>
             <td className="bold">₹{props.amount}</td>
@@ -96,7 +121,7 @@ export default function ExpenseItem(props){
                     <p>Edit</p>
                 </Button>
             </td>
-            </tr>
+            </tr>}
         </React.Fragment>
         
     )
