@@ -14,13 +14,16 @@ export default function App() {
 
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [isDarkMode, setIsDarkMode] = useState(false);
+	const [userId, setUserId] = useState('');
 
-	const login = useCallback(() => {
+	const login = useCallback((uid) => {
 		setIsLoggedIn(true);
+		setUserId(uid);
 	}, []);
 
 	const logout = useCallback(() => {
 		setIsLoggedIn(false);
+		setUserId(null);
 	}, []);
 
 	const darkThemeToggle = useCallback(() => {
@@ -51,7 +54,7 @@ export default function App() {
 	}
 
 	return(
-		<MyAuthContext.Provider value={{isLoggedIn, login, logout}}>
+		<MyAuthContext.Provider value={{isLoggedIn, userId, login, logout}}>
 			<DarkThemeContext.Provider value={{isDarkMode,darkThemeToggle}}>
 				<div className={`app-container ${isDarkMode && 'dark'}`}>
 					<MainNavigation />

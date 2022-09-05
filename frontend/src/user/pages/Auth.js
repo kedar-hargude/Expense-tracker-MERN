@@ -56,7 +56,7 @@ export default function Auth(){
         if(isLoginMode){
             // loggin existing user
             try{
-                await sendRequest(
+                const responseData = await sendRequest(
                     'http://localhost:5000/api/v1/users/login', 
                     'POST', 
                     JSON.stringify({
@@ -67,8 +67,7 @@ export default function Auth(){
                     'Content-Type': 'application/json'
                     }
                 );
-                
-                auth.login();
+                auth.login(responseData.userData.id);
             } catch(err){
                 // empty purposefully, setError already set in custom hook
             }
@@ -76,7 +75,7 @@ export default function Auth(){
         } else {
             // signing a new user:
             try{
-                await sendRequest(
+                const responseData = await sendRequest(
                     'http://localhost:5000/api/v1/users/signup', 
                     'POST',
                     JSON.stringify({
@@ -88,9 +87,7 @@ export default function Auth(){
                         'Content-Type': 'application/json'
                     }
                 );
-                
-                auth.login();
-
+                auth.login(responseData.userData.id);
             } catch(err){}
             
         }

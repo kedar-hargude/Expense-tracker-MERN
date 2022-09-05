@@ -22,7 +22,7 @@ export default function Dashboard(){
                     'http://localhost:5000/api/v1/expenses', 
                     'POST',
                     JSON.stringify({
-                        userId: "6308af341cfd923ada3dbc4a"
+                        userId: auth.userId
                     }),
                     {
                         'Content-Type': 'application/json'

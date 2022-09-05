@@ -79,6 +79,7 @@ export default function Expense(){
         })();
     }, []);
 
+    // // TODO sort arrays in backend, learn and use js date everything
     // const items = [];
     // if(loadedUserData){
     //     items = loadedUserData.data.expenses.map(expense => ({
