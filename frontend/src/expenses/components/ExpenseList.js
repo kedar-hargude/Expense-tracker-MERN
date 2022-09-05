@@ -34,6 +34,7 @@ export default function ExpenseList(props){
             type={item.type}
             amount={item.amount}
             date={item.date}
+            sendRequest={props.sendRequest}
         />
     ))
 

@@ -58,7 +58,7 @@ export default function Expense(){
 
     const auth = useContext(MyAuthContext);
 
-    const items = DUMMY_EXPENSE_DATA;
+    // const items = DUMMY_EXPENSE_DATA;
     const {isLoading, error, sendRequest, clearError} = useCustomFetch();
     const [loadedUserData, setLoadedUserData] = useState();
 
@@ -75,7 +75,6 @@ export default function Expense(){
                         'Content-Type': 'application/json'
                     }
                 );
-                console.log(responseData)
                 setLoadedUserData(responseData);
                 
             } catch(err){}
@@ -84,11 +83,27 @@ export default function Expense(){
     }, []);
 
     // // TODO sort arrays in backend, learn and use js date everything
-    // const items = [];
+    let items;
+    if(loadedUserData){
+        // items = [...loadedUserData.userData.expenses];
+        // incoming date is a string here
+        // console.log(loadedUserData.userData.expenses[0].date);
+        items = loadedUserData.userData.expenses.map(expense => {
+            expense.date = expense.date.split('T')[0];
+            const day = expense.date.split('-')[2];
+            const month = expense.date.split('-')[1];
+            const year = expense.date.split('-')[0];
+            const formattedDate = `${day}-${month}-${year}`
+            return {...expense,
+            date: formattedDate
+            }
+        });
+    }
     // if(loadedUserData){
     //     items = loadedUserData.data.expenses.map(expense => ({
     //         ...expense,
-    //         date: expense.date.toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})
+    //         date: expense.date
+    //         // date: expense.date.toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})
     //     }))
     // }
 

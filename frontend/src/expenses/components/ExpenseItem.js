@@ -59,9 +59,10 @@ export default function ExpenseItem(props){
             header='Edit expense'
             >
                 <UpdateExpense
-                    id={props.id}
+                    expenseId={props.id}
                     handleFormSubmit={updateExpenseSubmitHandler}
                     showDeleteWarningHandler={showDeleteWarningHandler}
+                    sendRequest={props.sendRequest}
                 />
             </Modal>
 

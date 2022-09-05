@@ -28,7 +28,7 @@ export default function Dashboard(){
                         'Content-Type': 'application/json'
                     }
                 );
-                console.log('inside')
+                // console.log('inside')
                 setLoadedUserData(responseData);
             } catch(err){}
 
@@ -39,8 +39,8 @@ export default function Dashboard(){
     let totalExpenditure = 0;
     
     if(loadedUserData){
-        console.log('Outside')
-        console.log(loadedUserData);
+        // console.log('Outside')
+        // console.log(loadedUserData);
         loadedUserData.userData.expenses.forEach(expense => {
             totalExpenditure += expense.amount;
         });

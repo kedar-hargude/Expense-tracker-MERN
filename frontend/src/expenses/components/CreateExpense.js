@@ -59,7 +59,6 @@ export default function CreateExpense(props){
     function handleFormSubmit(event){
         event.preventDefault();
         console.log(formState);
-        props.handleFormSubmit();
         // TODO post request to backend
         
         (async() => {
@@ -82,6 +81,8 @@ export default function CreateExpense(props){
 
             } catch(err){}
         })()
+
+        props.handleFormSubmit();
     }
 
 

@@ -102,6 +102,29 @@ exports.addExpense = async (req, res, next) => {
     });
 };
 
+exports.getExpense = async (req, res, next) => {
+    const { userId, expenseId } = req.body;
+
+    let foundUser;
+    try{
+        foundUser = await User.findById(userId);
+    } catch(err){
+        console.log(err);
+        return next(new CustomError(500, 'Internal error: Unable to find user. Please try again later'));
+    }
+
+    if(!foundUser){
+        return next(new CustomError(404, 'Invalid userId passed. No user exists.'));
+    }
+
+    const foundExpense = foundUser.expenses.id(expenseId);
+
+    res.status(200).json({
+        status: 'success',
+        expenseData: foundExpense.toObject({getters: true})
+    })
+}
+
 exports.updateExpense = async (req, res) => {
 
     const {userId, expenseId, title, amount, recurring, type, date} = req.body;
