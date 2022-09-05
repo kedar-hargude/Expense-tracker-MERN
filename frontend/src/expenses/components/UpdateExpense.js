@@ -168,11 +168,11 @@ export default function UpdateExpense(props){
 
     async function expenseUpdateFormSubmit(event){
         event.preventDefault();
-        console.log(formState);
-        props.handleFormSubmit(); // to close the modal
+        // console.log(formState);
+        
+        
         // TODO post request to backend
         try{
-            console.log('ithe bagh' + auth.userId)
             await sendRequest(
                 'http://localhost:5000/api/v1/expenses/update',
                 'PUT',
@@ -191,6 +191,8 @@ export default function UpdateExpense(props){
             )
         } catch(err){}
         
+        props.handleFormSubmit(); // to close the modal
+        props.reloadPage(); // to reload the expenses on the page
     }
 
 

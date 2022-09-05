@@ -63,6 +63,7 @@ export default function ExpenseItem(props){
                     handleFormSubmit={updateExpenseSubmitHandler}
                     showDeleteWarningHandler={showDeleteWarningHandler}
                     sendRequest={props.sendRequest}
+                    reloadPage={props.reloadPage}
                 />
             </Modal>
 

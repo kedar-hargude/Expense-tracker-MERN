@@ -35,6 +35,7 @@ export default function ExpenseList(props){
             amount={item.amount}
             date={item.date}
             sendRequest={props.sendRequest}
+            reloadPage={props.reloadPage}
         />
     ))
 
@@ -49,6 +50,7 @@ export default function ExpenseList(props){
                 <CreateExpense
                     handleFormSubmit={closeNewExpenseHandler}
                     sendRequest={props.sendRequest}
+                    reloadPage={props.reloadPage}
                 />
             </Modal>
             

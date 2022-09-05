@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useCallback } from "react";
 
 import ExpenseList from "../components/ExpenseList";
 import useCustomFetch from "../../shared/hooks/fetch-hook";
@@ -61,6 +61,7 @@ export default function Expense(){
     // const items = DUMMY_EXPENSE_DATA;
     const {isLoading, error, sendRequest, clearError} = useCustomFetch();
     const [loadedUserData, setLoadedUserData] = useState();
+    const [pageReloader, setPageReloader] = useState(false);
 
     useEffect(() => {
         (async () => {
@@ -80,7 +81,7 @@ export default function Expense(){
             } catch(err){}
 
         })();
-    }, []);
+    }, [pageReloader]);
 
     // // TODO sort arrays in backend, learn and use js date everything
     let items;
@@ -107,6 +108,11 @@ export default function Expense(){
     //     }))
     // }
 
+    // to reload all the expenses on the page on create, update or delete an expense
+    const reloadPage = useCallback(() => {
+        setPageReloader(prevState => !prevState);
+    }, []);
+
     return (
         <React.Fragment>
             <ErrorModal error={error} onClear={clearError} />
@@ -115,6 +121,7 @@ export default function Expense(){
                 <ExpenseList 
                     items={items}
                     sendRequest={sendRequest}
+                    reloadPage={reloadPage}
                 />
             }
         </React.Fragment>

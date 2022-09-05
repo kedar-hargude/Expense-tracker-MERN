@@ -83,6 +83,7 @@ export default function CreateExpense(props){
         })()
 
         props.handleFormSubmit();
+        props.reloadPage();
     }
 
 
