@@ -19,6 +19,10 @@ input{
     width: 50vw;
 }
 
+#email{
+    margin-left: 0;
+}
+
 .error{
     font-size: 1.5rem;
     font-weight: 500;

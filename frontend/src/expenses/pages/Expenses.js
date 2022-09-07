@@ -27,32 +27,32 @@ import { MyAuthContext } from "../../shared/context/auth.context";
     }
 
 */
-const DUMMY_EXPENSE_DATA = [
-    {
-        id: 1234123,
-        title: 'Mobile phone',
-        amount: 1000,
-        recurring: false,
-        type: 'Mobile',
-        date: '2022-08-15'
-    },
-    {
-        id: 23462456,
-        title: 'Scrimba subscription',
-        amount: 100,
-        recurring: true,
-        type: 'Entertainment',
-        date: '2022-08-15' 
-    },
-    {
-        id: 23452345234523452345234523,
-        title: 'Frontend Masters subscription',
-        amount: 100,
-        recurring: true,
-        type: 'Entertainment',
-        date: '2022-08-15' 
-    }
-];
+// const DUMMY_EXPENSE_DATA = [
+//     {
+//         id: 1234123,
+//         title: 'Mobile phone',
+//         amount: 1000,
+//         recurring: false,
+//         type: 'Mobile',
+//         date: '2022-08-15'
+//     },
+//     {
+//         id: 23462456,
+//         title: 'Scrimba subscription',
+//         amount: 100,
+//         recurring: true,
+//         type: 'Entertainment',
+//         date: '2022-08-15' 
+//     },
+//     {
+//         id: 23452345234523452345234523,
+//         title: 'Frontend Masters subscription',
+//         amount: 100,
+//         recurring: true,
+//         type: 'Entertainment',
+//         date: '2022-08-15' 
+//     }
+// ];
 
 export default function Expense(){
 

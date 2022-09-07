@@ -118,7 +118,7 @@ export default function UpdateExpense(props){
 
             
         })()
-    }, [props.sendRequest, props.expenseId, setInitialFormData]);
+    }, [sendRequest, props.expenseId, setInitialFormData]);
 
     // useEffect(()=> {
     //     if(identifiedExpense){

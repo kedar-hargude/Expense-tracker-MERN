@@ -108,7 +108,8 @@ exports.getUserInfo = async (req, res, next) => {
             lastName: foundUser.lastName,
             email: foundUser.email,
             password: foundUser.password,
-            mobileNumber: foundUser.mobileNumber
+            mobileNumber: foundUser.mobileNumber,
+            dateOfBirth: foundUser.dateOfBirth
         }
     })
 }
@@ -117,7 +118,7 @@ exports.getUserInfo = async (req, res, next) => {
 // password only given if you want to update the password
 exports.updateUserInfo = async (req, res, next) => {
 
-    const { userId, name, lastName, mobileNumber, email } = req.body;
+    const { userId, name, lastName, mobileNumber, email, dateOfBirth } = req.body;
 
     let password;
     if(req.body.password){
@@ -141,9 +142,9 @@ exports.updateUserInfo = async (req, res, next) => {
     // actually update the user
     let updateBodyOptions;
     if(req.body.password){
-        updateBodyOptions = {name, lastName, mobileNumber, email, password}
+        updateBodyOptions = {name, lastName, mobileNumber, email, dateOfBirth, password}
     } else{
-        updateBodyOptions = {name, lastName, mobileNumber, email}
+        updateBodyOptions = {name, lastName, mobileNumber, email, dateOfBirth}
     }
     
     let updatedUser;

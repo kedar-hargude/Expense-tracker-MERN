@@ -9,6 +9,7 @@ const userSchema = mongoose.Schema({
         required: [true, 'You must have a name!']
     },
     lastName: String,
+    dateOfBirth: Date,
     mobileNumber: {
         type: Number,
         min: 1000000000,

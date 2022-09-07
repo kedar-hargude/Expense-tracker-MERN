@@ -80,7 +80,7 @@ export default function CreateExpense(props){
             } catch(err){}
         })()
 
-        props.handleFormSubmit();
+        props.handleFormSubmit(); // TODO maybe place closing modals before using fetch, so that error modal may get a chance to pop up.
         props.reloadPage();
     }
 
