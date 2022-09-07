@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const userController = require('../controllers/userController');
+const userIdCheck = require('../controllers/expenseController').userIdCheck;
 
 const {checkEmailPasswordMiddleware, signUp, getUserInfo, logIn, updateUserInfo} = userController;
 
@@ -12,11 +13,11 @@ router.post('/signup', checkEmailPasswordMiddleware, signUp);
 router.post('/login', checkEmailPasswordMiddleware, logIn);
 
 // userId required
-router.post('/getUser', getUserInfo);
+router.post('/getUser', userIdCheck, getUserInfo);
 
 // user 'id, and full user' info should be passed on as input
 // maybe check if the SAME user is logged in before
-router.put('/update', checkEmailPasswordMiddleware, updateUserInfo);
+router.put('/update', userIdCheck, updateUserInfo);
 
 // // user 'id' passed as input
 // router.delete('/delete', userController.deleteUser);

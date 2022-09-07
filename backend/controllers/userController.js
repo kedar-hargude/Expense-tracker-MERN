@@ -113,11 +113,17 @@ exports.getUserInfo = async (req, res, next) => {
     })
 }
 
-// "userId", name, lastName, mobileNumber, email, password given
+// "userId", name, lastName, mobileNumber, email compulsory given
+// password only given if you want to update the password
 exports.updateUserInfo = async (req, res, next) => {
 
-    const { userId, name, lastName, mobileNumber, email, password } = req.body;
+    const { userId, name, lastName, mobileNumber, email } = req.body;
 
+    let password;
+    if(req.body.password){
+        password = req.body.password;
+    }
+    
     //check if another same email already exists in database
     let emailExistingUser;
     try{
@@ -133,11 +139,16 @@ exports.updateUserInfo = async (req, res, next) => {
     }
 
     // actually update the user
+    let updateBodyOptions;
+    if(req.body.password){
+        updateBodyOptions = {name, lastName, mobileNumber, email, password}
+    } else{
+        updateBodyOptions = {name, lastName, mobileNumber, email}
+    }
+    
     let updatedUser;
     try{
-        updatedUser = await User.findByIdAndUpdate(userId, {
-            name, lastName, mobileNumber, email, password
-        }, { runValidators: true, new: true })
+        updatedUser = await User.findByIdAndUpdate(userId, updateBodyOptions, { runValidators: true, new: true })
     } catch(err){
         console.log(err);
         return next(new CustomError(500, 'Fetching user failed. Please try again later.'));
@@ -146,7 +157,13 @@ exports.updateUserInfo = async (req, res, next) => {
     res.status(200).json({
         status: 'success',
         message: 'Updated the user',
-        userData: updatedUser
+        userData: {
+            name: updatedUser.name,
+            lastName: updatedUser.lastName,
+            email: updatedUser.email,
+            password: updatedUser.password,
+            mobileNumber: updatedUser.mobileNumber
+        }
     });
 }
 
