@@ -85,6 +85,34 @@ exports.logIn = async (req, res, next) => {
     })
 };
 
+// userId given
+exports.getUserInfo = async (req, res, next) => {
+    const {userId} = req.body;
+
+    let foundUser;
+    try{
+        foundUser = await User.findById(userId);
+    } catch(err){
+        console.log(err);
+        return next(new CustomError(500, 'Internal error: Unable to find user. Please try again later'));
+    }
+
+    if(!foundUser){
+        return next(new CustomError(404, 'Invalid userId passed. No user exists.'));
+    }
+
+    res.status(200).json({
+        status: 'success',
+        userData: {
+            name: foundUser.name,
+            lastName: foundUser.lastName,
+            email: foundUser.email,
+            password: foundUser.password,
+            mobileNumber: foundUser.mobileNumber
+        }
+    })
+}
+
 // "userId", name, lastName, mobileNumber, email, password given
 exports.updateUserInfo = async (req, res, next) => {
 

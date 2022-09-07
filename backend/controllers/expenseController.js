@@ -125,7 +125,7 @@ exports.getExpense = async (req, res, next) => {
     })
 }
 
-exports.updateExpense = async (req, res) => {
+exports.updateExpense = async (req, res, next) => {
 
     const {userId, expenseId, title, amount, recurring, type, date} = req.body;
 
@@ -176,7 +176,7 @@ exports.updateExpense = async (req, res) => {
 };
 
 // userId and expenseId is passed
-exports.deleteExpense = async (req, res) => {
+exports.deleteExpense = async (req, res, next) => {
 
     const { userId, expenseId } = req.body;
 
