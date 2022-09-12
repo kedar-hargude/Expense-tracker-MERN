@@ -14,7 +14,7 @@ exports.userIdCheck = async (req, res, next) => {
 
 // check if all the parameters are passed in the body
 exports.checkFullRequestBody = (req, res, next) => {
-    if (!req.body.title || !req.body.amount || !req.body.recurring || !req.body.type || !req.body.date){
+    if (!req.body.title || !req.body.amount || !req.body.type || !req.body.date){
         return next(new CustomError(404, 'Incomplete credentials given. Please pass title, amount, recurring, type, date as arguments.'));
     }
     next();
@@ -45,6 +45,11 @@ exports.getFullUserInfo = async (req, res, next) => {
         return next(new CustomError(404, 'Invalid userId passed. No user exists.'));
     }
 
+    // to sort in descending order
+    foundUser.expenses = foundUser.expenses.sort(
+        (objA, objB) => Number(objB.date) - Number(objA.date)
+    )
+    
     res.status(200).json({
         status: 'success',
         userData: foundUser.toObject({getters: true})

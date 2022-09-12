@@ -6,8 +6,8 @@ const User = require('./models/userModel');
 const Expense = require('./models/expenseModel').Expense;
 
 mongoose
-    // .connect(process.env.DB_CONNECTION_STRING)
-    .connect(process.env.DB_LOCAL_STRING)
+    .connect(process.env.DB_CONNECTION_STRING)
+    // .connect(process.env.DB_LOCAL_STRING)
     .then(() => {
         console.log('Database connected to cloud na broo!!');
     })

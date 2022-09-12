@@ -17,20 +17,22 @@ export default function Dashboard(){
     
     useEffect(() => {
         (async () => {
-            try{
-                const responseData = await sendRequest(
-                    'http://localhost:5000/api/v1/expenses', 
-                    'POST',
-                    JSON.stringify({
-                        userId: auth.userId
-                    }),
-                    {
-                        'Content-Type': 'application/json'
-                    }
-                );
-                // console.log('inside')
-                setLoadedUserData(responseData);
-            } catch(err){}
+            if(auth.isLoggedIn){
+                try{
+                    const responseData = await sendRequest(
+                        'http://localhost:5000/api/v1/expenses', 
+                        'POST',
+                        JSON.stringify({
+                            userId: auth.userId
+                        }),
+                        {
+                            'Content-Type': 'application/json'
+                        }
+                    );
+                    // console.log('inside')
+                    setLoadedUserData(responseData);
+                } catch(err){}
+            }  
 
         })();
     }, [sendRequest]);

@@ -102,7 +102,14 @@ export default function SettingsForm(props){
                     isValid: true
                 },
                 dateOfBirth: {
-                    value: responseData.userData.dateOfBirth.split('T')[0] || '',
+                    // value: responseData.userData.dateOfBirth.split('T')[0] || '',
+                    value: (() => {
+                        if(!responseData.userData.dateOfBirth){
+                            return ''
+                        } else {
+                            return responseData.userData.dateOfBirth.split('T')[0]
+                        }
+                    })(),
                     isValid: true
                 },
                 mobileNumber: {
