@@ -22,9 +22,9 @@ button p{
 }
 
 @media (max-width: 500px){
-    td:nth-child(2),
-    td:nth-child(4),
-    td:nth-child(5){
+    .expense-row__container > td:nth-child(2),
+    .expense-row__container > td:nth-child(4),
+    .expense-row__container > td:nth-child(5){
         display: none;
     }
 }

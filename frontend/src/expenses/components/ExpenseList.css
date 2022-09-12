@@ -16,9 +16,9 @@ table thead th{
 
 
 @media (max-width: 500px){
-    table tr th:nth-child(2),
-    table tr th:nth-child(4),
-    table tr th:nth-child(5)
+    .expense-list__container > table tr th:nth-child(2),
+    .expense-list__container > table tr th:nth-child(4),
+    .expense-list__container > table tr th:nth-child(5)
     {
         display: none;
     }
