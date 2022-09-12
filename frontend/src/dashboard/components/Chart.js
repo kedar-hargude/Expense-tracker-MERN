@@ -35,5 +35,6 @@ export default function Chart(props){
                 />
             </LineChart>
         </ResponsiveContainer>
+        // <h3>Chart here</h3>
     )
 }
