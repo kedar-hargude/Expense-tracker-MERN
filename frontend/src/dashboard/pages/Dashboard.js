@@ -94,9 +94,12 @@ export default function Dashboard(){
         })
 
         if(loadedUserData.userData.expenses.length !== 0){
-            firstThreeExpenses = [loadedUserData.userData.expenses[0], 
-                                loadedUserData.userData.expenses[1], 
-                                loadedUserData.userData.expenses[2]];
+            firstThreeExpenses.push(loadedUserData.userData.expenses[0]);
+
+            loadedUserData.userData.expenses[1] && firstThreeExpenses.push(loadedUserData.userData.expenses[1]);
+
+            loadedUserData.userData.expenses[2] && firstThreeExpenses.push(loadedUserData.userData.expenses[2]);
+            
         } else {
             firstThreeExpenses = [{
                 id:1,

@@ -1,7 +1,7 @@
 
 .expense-list__container{
     border: 4px solid brown;
-    /* height: calc(100vh - 4rem); */
+    min-height: calc(100vh - 4rem);
     max-height: 100%;
 }
 
