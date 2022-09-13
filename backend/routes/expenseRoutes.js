@@ -2,7 +2,7 @@ const router = require('express').Router();
 const expenseController = require('../controllers/expenseController');
 const { nanoid } = require('nanoid');
 
-const { userIdCheck, getFullUserInfo, checkExpenseId, checkFullRequestBody, addExpense, updateExpense, deleteExpense, getExpense } = expenseController;
+const { userIdCheck, getAllExpenses, checkExpenseId, checkFullRequestBody, addExpense, updateExpense, deleteExpense, getExpense } = expenseController;
 
 // middleware to check whether every request has a userId.
 router.use(userIdCheck);
@@ -10,7 +10,7 @@ router.use(userIdCheck);
 // 'userId', which is the id of the user must be compulsorily passed to all requests 
 
 //Get all expense values of a specific userId. only userId is passed
-router.post('/', getFullUserInfo);
+router.post('/', getAllExpenses);
 
 // userId, title, amount, reccuring, type, date passed
 router.post('/add', checkFullRequestBody, addExpense);

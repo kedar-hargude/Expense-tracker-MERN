@@ -14,7 +14,7 @@ export default function Auth(){
 
     const auth = useContext(MyAuthContext);
 
-    const [isLoginMode, setIsLoginMode] = useState(false);
+    const [isLoginMode, setIsLoginMode] = useState(true);
     const {isLoading, error, sendRequest, clearError} = useCustomFetch();
 
     const [formState, inputHandler, , setInitialFormData] = useForm({

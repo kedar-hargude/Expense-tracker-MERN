@@ -80,7 +80,12 @@ exports.logIn = async (req, res, next) => {
     res.status(200).json({
         status: 'success',
         message: `User ${existingUser.name} is logged in.`,
-        userData: existingUser.toObject({getters: true})
+        // userData: existingUser.toObject({getters: true}),
+        userData: {
+            name: existingUser.name,
+            email: existingUser.email,
+            id: existingUser.id
+        }
         // userData: existingUser.toObject({getters:true}) //TODO think about whether to apply getter to everyone...it just returns an id, doesn't store it in the database.
     })
 };
@@ -107,7 +112,7 @@ exports.getUserInfo = async (req, res, next) => {
             name: foundUser.name,
             lastName: foundUser.lastName,
             email: foundUser.email,
-            password: foundUser.password,
+            // password: foundUser.password,
             mobileNumber: foundUser.mobileNumber,
             dateOfBirth: foundUser.dateOfBirth
         }
@@ -162,7 +167,7 @@ exports.updateUserInfo = async (req, res, next) => {
             name: updatedUser.name,
             lastName: updatedUser.lastName,
             email: updatedUser.email,
-            password: updatedUser.password,
+            // password: updatedUser.password,
             mobileNumber: updatedUser.mobileNumber
         }
     });

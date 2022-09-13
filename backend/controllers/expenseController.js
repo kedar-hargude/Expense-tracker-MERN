@@ -29,7 +29,7 @@ exports.checkExpenseId = (req, res, next) => {
 };
 
 // get all expenses of an individual. userId is provided
-exports.getFullUserInfo = async (req, res, next) => {
+exports.getAllExpenses = async (req, res, next) => {
 
     const { userId } = req.body;
 
@@ -52,7 +52,10 @@ exports.getFullUserInfo = async (req, res, next) => {
     
     res.status(200).json({
         status: 'success',
-        userData: foundUser.toObject({getters: true})
+        // userData: foundUser.toObject({getters: true}),
+        userData: {
+            expenses: foundUser.expenses.toObject({getters: true})
+        }
     })
 };
 
@@ -176,7 +179,8 @@ exports.updateExpense = async (req, res, next) => {
 
     res.status(200).json({
         status: 'success',
-        data: foundUser
+        // data: foundUser
+        updatedExpense: foundExpense
     })
 };
 
