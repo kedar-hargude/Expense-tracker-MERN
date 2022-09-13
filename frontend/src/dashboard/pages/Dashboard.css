@@ -39,6 +39,8 @@
     /* border: 2px solid red; */
     /* height: calc(100vh - 6rem); */
     padding: 0.5rem;
+    max-height: calc(100vh - 4rem);
+    /* overflow: scroll; */
 }
 
 .chart-container{

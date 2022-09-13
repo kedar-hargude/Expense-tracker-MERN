@@ -55,7 +55,7 @@ export default function ExpenseList(props){
             </Modal>
             
             <div className="expense-list__container">
-                <div>
+                <div className="new-expense-btn--container">
                     <Button onClick={openNewExpenseHandler} >
                         Create Expense
                     </Button>
