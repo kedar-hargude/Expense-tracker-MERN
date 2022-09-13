@@ -33,6 +33,7 @@ import "./SettingsForm.css";
     // };
 
 export default function SettingsForm(props){
+    // TODO add password reset functionality through email if password was forgotten
 
     const {isLoading, error, sendRequest, clearError} = useCustomFetch();
     const auth = useContext(MyAuthContext);
@@ -223,6 +224,9 @@ export default function SettingsForm(props){
 
         } catch(err){}
 
+        setTimeout(() => {
+            setSuccessMessage(false);
+        }, 1500);
     }
 
     if(!loadedUser){
@@ -330,7 +334,7 @@ export default function SettingsForm(props){
             <Button 
                         type='submit'
                         // onClick={settingsFormSubmitHandler}
-                        disabled={!formState.isValid}
+                        disabled={false}
                         // disabled={!formState.isValid}
                         green
                         // width='12%'

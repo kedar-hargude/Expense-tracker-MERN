@@ -12,7 +12,6 @@ import Chart from "../components/Chart";
 import "./Dashboard.css"
 
 export default function Dashboard(){
-
     const {isLoading, error, sendRequest, clearError} = useCustomFetch();
     const [loadedUserData, setLoadedUserData] = useState();
 
@@ -94,11 +93,12 @@ export default function Dashboard(){
         })
 
         if(loadedUserData.userData.expenses.length !== 0){
-            firstThreeExpenses.push(loadedUserData.userData.expenses[0]);
+            const {expenses} = loadedUserData.userData;
+            firstThreeExpenses.push(expenses[0]);
 
-            loadedUserData.userData.expenses[1] && firstThreeExpenses.push(loadedUserData.userData.expenses[1]);
+            expenses[1] && firstThreeExpenses.push(expenses[1]);
 
-            loadedUserData.userData.expenses[2] && firstThreeExpenses.push(loadedUserData.userData.expenses[2]);
+            expenses[2] && firstThreeExpenses.push(expenses[2]);
             
         } else {
             firstThreeExpenses = [{

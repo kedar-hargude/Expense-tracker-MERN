@@ -11,7 +11,7 @@ import {
   } from 'recharts';
 
 export default function Chart(props){
-
+    // TODO sort values according to dates
     // console.log(props.data);
     const chartData = props.data.map(expense => ({
         amount: expense.amount,
