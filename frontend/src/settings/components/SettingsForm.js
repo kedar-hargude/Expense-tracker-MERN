@@ -183,7 +183,7 @@ export default function SettingsForm(props){
         if(formState.inputs.password.value !== formState.inputs.confirmPassword.value){
             return setPasswordError(true);
         }
-        // console.log(formState);
+        console.log(formState);
         //TODO submit info to backend
         
         try{
@@ -309,7 +309,7 @@ export default function SettingsForm(props){
                     <Input
                         id='password'
                         type='password'
-                        label='Password'
+                        label='Update Password (If you want to update)'
                         errorText='Please enter a password greater than 5 digits'
                         validators={[VALIDATOR_MINLENGTH(5)]}
                         onInput={inputHandler}
@@ -320,7 +320,7 @@ export default function SettingsForm(props){
                     <Input
                         id='confirmPassword'
                         type='password'
-                        label='Confirm Password'
+                        label='Confirm Update Password'
                         errorText='Please enter a password greater than 5 digits'
                         validators={[VALIDATOR_MINLENGTH(5)]}
                         onInput={inputHandler}

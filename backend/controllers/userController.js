@@ -1,5 +1,6 @@
 const User = require('../models/userModel');
-const CustomError = require('../models/custom-error')
+const CustomError = require('../models/custom-error');
+const bcrypt = require('bcryptjs');
 
 // check email and password of incoming req.body
 exports.checkEmailPasswordMiddleware = (req, res, next) => {
@@ -43,9 +44,20 @@ exports.signUp = async (req, res, next) => {
         return next(new CustomError(400, 'User already exists. Enter different email.'));
     }
 
+    let hashedPassword;
+    try{
+        hashedPassword = await bcrypt.hash(password, 10);
+    } catch(err){
+        return next(new CustomError(500, 'Could not create user and password, please try again.'))
+    }
+
     let newUserDoc;
     try{
-        newUserDoc = await User.create(req.body);
+        newUserDoc = await User.create({
+            name,
+            email,
+            password: hashedPassword
+        });
     } catch(err){
         console.log(err);
         return next(new CustomError(500, 'Adding user failed. Please try again later'));
@@ -54,7 +66,12 @@ exports.signUp = async (req, res, next) => {
     res.status(201).json({
         status: 'success', 
         message: `User ${req.body.name} signed up!`,
-        userData: newUserDoc.toObject({getters: true})
+        // userData: newUserDoc.toObject({getters: true})
+        userData: {
+            name: newUserDoc.name,
+            email: newUserDoc.email,
+            id: newUserDoc.id
+        }
     });
 };
 
@@ -70,11 +87,23 @@ exports.logIn = async (req, res, next) => {
         return next(new CustomError(500, 'Could not verify details. Please try again later.'))
     }
 
-    if(!existingUser || existingUser.password !== password){
-        return res.status(400).json({
-            status: 'error',
-            message: 'Invalid Credentials, could not log you in.'
-        })
+    if(!existingUser){
+        return next(new CustomError(400, 'Invalid Credentials, could not log you in.'));
+        // res.status(400).json({
+        //     status: 'error',
+        //     message: 'Invalid Credentials, could not log you in.'
+        // })
+    }
+
+    let isValidPassword;
+    try{
+        isValidPassword = await bcrypt.compare(password, existingUser.password);
+    } catch(err){
+        return next(new CustomError(500, 'Could not log you in. Please check your credentials and try again.'));
+    }
+
+    if(!isValidPassword){
+        return next(new CustomError(400, 'Invalid Credentials, could not log you in.'));
     }
 
     res.status(200).json({
