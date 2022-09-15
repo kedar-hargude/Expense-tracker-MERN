@@ -6,7 +6,7 @@ const checkToken = require('../middleware/check-token-auth.js');
 const { userIdCheck, getAllExpenses, checkExpenseId, checkFullRequestBody, addExpense, updateExpense, deleteExpense, getExpense } = expenseController;
 
 // middleware to check whether every request has a userId.
-router.use(userIdCheck);
+// router.use(userIdCheck);
 router.use(checkToken);
 
 // 'userId', which is the id of the user must be compulsorily passed to all requests 

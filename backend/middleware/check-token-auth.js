@@ -14,13 +14,13 @@ module.exports = (req, res, next) => {
         }
 
         const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-
+        // console.log(decodedToken);
         // add new property to the request to use later in flow
         req.decodedUserData = { userId: decodedToken.userId };
         next();
 
     } catch(err){
-        return next(new CustomError('Authentication failed! Couldnt verify token!', 401));
+        return next(new CustomError('Authentication failed! Couldnt verify token!', 403));
     }
     
 };

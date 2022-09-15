@@ -149,7 +149,7 @@ exports.logIn = async (req, res, next) => {
 
 // userId given
 exports.getUserInfo = async (req, res, next) => {
-    const {userId} = req.body;
+    const userId = req.decodedUserData.userId;
 
     let foundUser;
     try{
@@ -180,7 +180,8 @@ exports.getUserInfo = async (req, res, next) => {
 // password only given if you want to update the password
 exports.updateUserInfo = async (req, res, next) => {
 
-    const { userId, name, lastName, mobileNumber, email, dateOfBirth } = req.body;
+    const { name, lastName, mobileNumber, email, dateOfBirth } = req.body;
+    const userId = req.decodedUserData.userId;
 
     let password;
     if(req.body.password){

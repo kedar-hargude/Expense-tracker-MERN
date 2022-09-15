@@ -18,11 +18,11 @@ router.post('/login', checkEmailPasswordMiddleware, logIn);
 router.use(checkToken);
 
 // userId required
-router.post('/getUser', userIdCheck, getUserInfo);
+router.post('/getUser', getUserInfo);
 
 // user 'id, and full user' info should be passed on as input
 // maybe check if the SAME user is logged in before
-router.put('/update', userIdCheck, updateUserInfo);
+router.put('/update', updateUserInfo);
 
 // // user 'id' passed as input
 // router.delete('/delete', userController.deleteUser);

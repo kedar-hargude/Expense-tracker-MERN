@@ -3,14 +3,15 @@ const User = require('../models/userModel');
 const CustomError = require('../models/custom-error');
 const { nanoid } = require('nanoid');
 
+//TODO use req.decodedUserData.userId as the userId to do anything
 //check if userId exists in request and in database
-exports.userIdCheck = async (req, res, next) => {
-    if(!req.body.userId){
-        return next(new CustomError(404, 'Pass on a userId'));
-    }
+// exports.userIdCheck = async (req, res, next) => {
+//     if(!req.body.userId){
+//         return next(new CustomError(404, 'Pass on a userId'));
+//     }
 
-    next();
-};
+//     next();
+// };
 
 // check if all the parameters are passed in the body
 exports.checkFullRequestBody = (req, res, next) => {
@@ -31,7 +32,7 @@ exports.checkExpenseId = (req, res, next) => {
 // get all expenses of an individual. userId is provided
 exports.getAllExpenses = async (req, res, next) => {
 
-    const { userId } = req.body;
+    const userId = req.decodedUserData.userId;
 
     let foundUser;
     try{
@@ -63,7 +64,7 @@ exports.getAllExpenses = async (req, res, next) => {
 // add a new expense
 exports.addExpense = async (req, res, next) => {
     
-    const userId = req.body.userId;
+    const userId = req.decodedUserData.userId;
 
     let foundUser;
     try{
@@ -111,7 +112,8 @@ exports.addExpense = async (req, res, next) => {
 };
 
 exports.getExpense = async (req, res, next) => {
-    const { userId, expenseId } = req.body;
+    const userId = req.decodedUserData.userId;
+    const { expenseId } = req.body;
 
     let foundUser;
     try{
@@ -135,7 +137,8 @@ exports.getExpense = async (req, res, next) => {
 
 exports.updateExpense = async (req, res, next) => {
 
-    const {userId, expenseId, title, amount, recurring, type, date} = req.body;
+    const userId = req.decodedUserData.userId;
+    const {expenseId, title, amount, recurring, type, date} = req.body;
 
     let foundUser;
     try{
@@ -187,7 +190,8 @@ exports.updateExpense = async (req, res, next) => {
 // userId and expenseId is passed
 exports.deleteExpense = async (req, res, next) => {
 
-    const { userId, expenseId } = req.body;
+    const userId = req.decodedUserData.userId;
+    const { expenseId } = req.body;
 
     let foundUser;
     try{
