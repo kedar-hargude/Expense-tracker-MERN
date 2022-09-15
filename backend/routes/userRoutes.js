@@ -1,6 +1,8 @@
 const router = require('express').Router();
+
 const userController = require('../controllers/userController');
-const userIdCheck = require('../controllers/expenseController').userIdCheck;
+const { userIdCheck } = require('../controllers/expenseController');
+const checkToken = require('../middleware/check-token-auth.js');
 
 const {checkEmailPasswordMiddleware, signUp, getUserInfo, logIn, updateUserInfo} = userController;
 
@@ -11,6 +13,9 @@ router.post('/signup', checkEmailPasswordMiddleware, signUp);
 
 // 'email and password' required
 router.post('/login', checkEmailPasswordMiddleware, logIn);
+
+// check auth token middleware
+router.use(checkToken);
 
 // userId required
 router.post('/getUser', userIdCheck, getUserInfo);

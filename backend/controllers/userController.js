@@ -1,6 +1,7 @@
 const User = require('../models/userModel');
 const CustomError = require('../models/custom-error');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 // check email and password of incoming req.body
 exports.checkEmailPasswordMiddleware = (req, res, next) => {
@@ -63,6 +64,18 @@ exports.signUp = async (req, res, next) => {
         return next(new CustomError(500, 'Adding user failed. Please try again later'));
     }
 
+    let token;
+    try{
+        token = jwt.sign({
+            userId: newUserDoc.id, email: newUserDoc.email
+        }, 
+        process.env.JWT_SECRET, 
+        {expiresIn: process.env.JWT_EXPIRES_IN}
+        );
+    } catch(err){
+        return next(new CustomError(500, 'Not able to create token. Try again later.'));
+    }
+
     res.status(201).json({
         status: 'success', 
         message: `User ${req.body.name} signed up!`,
@@ -70,7 +83,8 @@ exports.signUp = async (req, res, next) => {
         userData: {
             name: newUserDoc.name,
             email: newUserDoc.email,
-            id: newUserDoc.id
+            id: newUserDoc.id,
+            token: token
         }
     });
 };
@@ -106,6 +120,19 @@ exports.logIn = async (req, res, next) => {
         return next(new CustomError(400, 'Invalid Credentials, could not log you in.'));
     }
 
+    let token;
+    try{
+        token = jwt.sign({
+            userId: existingUser.id,
+            email: existingUser.email
+        },
+        process.env.JWT_SECRET,
+        {expiresIn: process.env.JWT_EXPIRES_IN}
+        );
+    } catch(err){
+        return next(new CustomError(500, 'Could not log you in. Please check your credentials and try again.'))
+    }
+
     res.status(200).json({
         status: 'success',
         message: `User ${existingUser.name} is logged in.`,
@@ -113,9 +140,9 @@ exports.logIn = async (req, res, next) => {
         userData: {
             name: existingUser.name,
             email: existingUser.email,
-            id: existingUser.id
+            id: existingUser.id,
+            token: token
         }
-        // userData: existingUser.toObject({getters:true}) //TODO think about whether to apply getter to everyone...it just returns an id, doesn't store it in the database.
     })
 };
 
