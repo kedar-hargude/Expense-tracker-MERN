@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import {useNavigate} from 'react-router-dom';
 
 import Button from "../../shared/components/FormElements/Button";
 import Modal from "../../shared/components/UIElements/Modal";
@@ -13,6 +14,8 @@ export default function ExpenseItem(props){
 
     const [showModal, setShowModal] = useState(false);
     const [showDeleteConfirmModal, setShowDeleteConfirmModal] = useState(false);
+
+    const navigate = useNavigate();
 
     const {isLoading, error, sendRequest, clearError} = useCustomFetch();
     const auth = useContext(MyAuthContext);
@@ -48,7 +51,7 @@ export default function ExpenseItem(props){
         setShowDeleteConfirmModal(false);
         // TODO delete request to backend
         try{
-            await sendRequest(
+            const responseData = await sendRequest(
                 'http://localhost:5000/api/v1/expenses/delete',
                 'DELETE',
                 JSON.stringify({
@@ -63,7 +66,8 @@ export default function ExpenseItem(props){
 
             props.reloadPage();
         } catch(err){}
-
+        
+        navigate('/', {replace: true});
     }
 
     // {
