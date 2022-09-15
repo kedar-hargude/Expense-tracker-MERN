@@ -86,7 +86,8 @@ export default function UpdateExpense(props){
                     expenseId: props.expenseId 
                 }),
                 {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + auth.token
                 }
             )
             // console.log(responseData);
@@ -186,13 +187,17 @@ export default function UpdateExpense(props){
                     date: formState.inputs.date.value
                 }),
                 {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + auth.token
                 }
-            )
+            );
+
+            props.reloadPage(); // to reload the expenses on the page
+            
         } catch(err){}
 
         props.handleFormSubmit(); // to close the modal
-        props.reloadPage(); // to reload the expenses on the page
+        
     }
 
 

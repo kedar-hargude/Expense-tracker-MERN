@@ -28,7 +28,8 @@ export default function Dashboard(){
                             userId: auth.userId
                         }),
                         {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + auth.token
                         }
                     );
                     // console.log('inside')

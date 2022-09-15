@@ -91,6 +91,7 @@ exports.signUp = async (req, res, next) => {
 
 // email, password given
 exports.logIn = async (req, res, next) => {
+    // default pass: asdfasdf
     
     const {email, password} = req.body;
     let existingUser;

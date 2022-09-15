@@ -73,15 +73,17 @@ export default function CreateExpense(props){
                         date: formState.inputs.date.value
                     }), 
                     {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + auth.token
                     }
-                )
+                );
+
+                props.reloadPage();
 
             } catch(err){}
         })()
 
         props.handleFormSubmit(); // TODO maybe place closing modals before using fetch, so that error modal may get a chance to pop up.
-        props.reloadPage();
     }
 
 

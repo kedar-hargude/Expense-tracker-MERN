@@ -4,6 +4,9 @@ const CustomError = require('../models/custom-error');
 
 module.exports = (req, res, next) => {
     // let token;
+    if (req.method === 'OPTIONS') {
+        return next();
+    }
     try{
         const token = req.headers.authorization.split(' ')[1];
         if(!token){

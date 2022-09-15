@@ -48,13 +48,14 @@ export default function Auth(){
         setIsLoginMode(prevState => !prevState);
     }
 
+    // after Submitting the info to signup/login
     const authSubmitHandler = async (event) => {
         event.preventDefault();
 
         // setIsLoading(true);
 
         if(isLoginMode){
-            // loggin existing user
+            // login existing user
             try{
                 const responseData = await sendRequest(
                     'http://localhost:5000/api/v1/users/login', 
@@ -67,7 +68,7 @@ export default function Auth(){
                     'Content-Type': 'application/json'
                     }
                 );
-                auth.login(responseData.userData.id);
+                auth.login(responseData.userData.id, responseData.userData.token);
             } catch(err){
                 // empty purposefully, setError already set in custom hook
             }
@@ -87,7 +88,7 @@ export default function Auth(){
                         'Content-Type': 'application/json'
                     }
                 );
-                auth.login(responseData.userData.id);
+                auth.login(responseData.userData.id, responseData.userData.token);
             } catch(err){}
             
         }

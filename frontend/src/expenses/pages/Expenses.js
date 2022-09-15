@@ -73,7 +73,8 @@ export default function Expense(){
                         userId: auth.userId
                     }),
                     {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + auth.token
                     }
                 );
                 setLoadedUserData(responseData);

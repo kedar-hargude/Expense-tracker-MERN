@@ -56,12 +56,14 @@ export default function ExpenseItem(props){
                     expenseId: props.id
                 }),
                 {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + auth.token
                 }
-            )
+            );
+
+            props.reloadPage();
         } catch(err){}
 
-        props.reloadPage();
     }
 
     // {

@@ -87,7 +87,8 @@ export default function SettingsForm(props){
                     userId: auth.userId
                 }),
                 {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + auth.token
                 }
             )
         
@@ -183,7 +184,7 @@ export default function SettingsForm(props){
         if(formState.inputs.password.value !== formState.inputs.confirmPassword.value){
             return setPasswordError(true);
         }
-        console.log(formState);
+        // console.log(formState);
         //TODO submit info to backend
         
         try{
@@ -215,7 +216,8 @@ export default function SettingsForm(props){
                 'PUT',
                 JSON.stringify(requestBodyOptions),
                 {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + auth.token
                 }
             )
 
