@@ -51,23 +51,34 @@ export default function ExpenseItem(props){
         setShowDeleteConfirmModal(false);
         // TODO delete request to backend
         try{
-            const responseData = await sendRequest(
-                'http://localhost:5000/api/v1/expenses/delete',
-                'DELETE',
-                JSON.stringify({
+            // await sendRequest(
+            //     'http://localhost:5000/api/v1/expenses/delete',
+            //     'DELETE',
+            //     JSON.stringify({
+            //         userId: auth.userId,
+            //         expenseId: props.id
+            //     }),
+            //     {
+            //         'Content-Type': 'application/json',
+            //         'Authorization': 'Bearer ' + auth.token
+            //     }
+            // );
+            await fetch('http://localhost:5000/api/v1/expenses/delete', {
+                method: 'DELETE',
+                body: JSON.stringify({
                     userId: auth.userId,
                     expenseId: props.id
                 }),
-                {
+                headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + auth.token
                 }
-            );
+            })
 
             props.reloadPage();
         } catch(err){}
         
-        navigate('/', {replace: true});
+        // navigate('/', {replace: true});
     }
 
     // {
