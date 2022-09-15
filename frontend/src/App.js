@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import MainNavigation from './shared/components/Navigation/MainNavigation';
@@ -8,6 +8,7 @@ import Settings from './settings/pages/Settings';
 import Auth from './user/pages/Auth';
 import { MyAuthContext } from './shared/context/auth.context';
 import { DarkThemeContext } from './shared/context/darkTheme-context';
+import LoadingSpinner from './shared/components/UIElements/LoadingSpinner';
 import './App.css';
 
 export default function App() {
@@ -15,6 +16,7 @@ export default function App() {
 	const [token, setToken] = useState(false);
 	const [isDarkMode, setIsDarkMode] = useState(false);
 	const [userId, setUserId] = useState(false);
+	const [isChecking, setIsChecking] = useState(true);
 
 	const login = useCallback((uid, token) => {
 		setToken(token);
@@ -28,11 +30,20 @@ export default function App() {
 	const logout = useCallback(() => {
 		setToken(null);
 		setUserId(null);
+		localStorage.removeItem('userData');
 	}, []);
 
 	const darkThemeToggle = useCallback(() => {
 		setIsDarkMode(prevState => !prevState);
 	}, []);
+
+	useEffect(() => {
+		const storedData = JSON.parse(localStorage.getItem('userData'));
+		if(storedData && storedData.token){
+			login(storedData.userId, storedData.token);
+		}
+		setIsChecking(false);
+	}, [login]);
 
 	let routes;
 
@@ -58,7 +69,9 @@ export default function App() {
 	}
 
 	return(
-		<MyAuthContext.Provider value={{
+		<React.Fragment>
+		{isChecking && <LoadingSpinner asOverlay />}
+		{!isChecking && <MyAuthContext.Provider value={{
 				isLoggedIn: !!token,
 				token,
 				userId,
@@ -76,6 +89,7 @@ export default function App() {
 						</main>
 				</div>
 			</DarkThemeContext.Provider>
-		</MyAuthContext.Provider>
+		</MyAuthContext.Provider>}
+		</React.Fragment>
 	)
 }
