@@ -11,25 +11,35 @@ import { DarkThemeContext } from './shared/context/darkTheme-context';
 import LoadingSpinner from './shared/components/UIElements/LoadingSpinner';
 import './App.css';
 
+let logoutTimer;
+
 export default function App() {
 
 	const [token, setToken] = useState(false);
 	const [isDarkMode, setIsDarkMode] = useState(false);
 	const [userId, setUserId] = useState(false);
 	const [isChecking, setIsChecking] = useState(true);
+	const [tokenExpirationState, setTokenExpirationState] = useState();
 
-	const login = useCallback((uid, token) => {
+	const login = useCallback((uid, token, expirationDate) => {
 		setToken(token);
+		setUserId(uid);
+		const tokenExpirationDate = expirationDate || new Date(new Date().getTime() + 1000*60*60 ); // logout after 1 hour session
+		setTokenExpirationState(tokenExpirationDate);
 		localStorage.setItem(
 			'userData',
-			JSON.stringify({userId: uid, token: token})
+			JSON.stringify({
+				userId: uid, 
+				token: token,
+				expiration: tokenExpirationDate.toISOString()
+			})
 		);
-		setUserId(uid);
 	}, []);
 
 	const logout = useCallback(() => {
 		setToken(null);
 		setUserId(null);
+		setTokenExpirationState(null);
 		localStorage.removeItem('userData');
 	}, []);
 
@@ -38,9 +48,19 @@ export default function App() {
 	}, []);
 
 	useEffect(() => {
+		if(token && tokenExpirationState){
+			const remainingTime = tokenExpirationState.getTime() - new Date().getTime();
+			logoutTimer = setTimeout(logout, remainingTime);
+		} else {
+			clearTimeout(logoutTimer);
+		}
+	}, [token, logout, tokenExpirationState]);
+
+	useEffect(() => {
 		const storedData = JSON.parse(localStorage.getItem('userData'));
-		if(storedData && storedData.token){
-			login(storedData.userId, storedData.token);
+		if(storedData && storedData.token && 
+			new Date(storedData.expiration) > new Date()){
+			login(storedData.userId, storedData.token, new Date(storedData.expiration));
 		}
 		setIsChecking(false);
 	}, [login]);
