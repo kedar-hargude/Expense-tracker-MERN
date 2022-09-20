@@ -4,7 +4,7 @@
   "description": "Practicing a fullstack project for the first time. ",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js"
   },
   "author": "Kedar Hargude",
   "license": "ISC",
