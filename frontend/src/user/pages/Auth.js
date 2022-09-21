@@ -57,7 +57,6 @@ export default function Auth(){
         if(isLoginMode){
             // login existing user
             try{
-                console.log(process.env.REACT_APP_BACKEND_URL);
                 const responseData = await sendRequest(
                     `${process.env.REACT_APP_BACKEND_URL}api/v1/users/login`, 
                     'POST', 
