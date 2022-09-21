@@ -67,7 +67,7 @@ export default function Expense(){
         (async () => {
             try{
                 const responseData = await sendRequest(
-                    'http://localhost:5000/api/v1/expenses', 
+                    `${process.env.REACT_APP_BACKEND_URL}api/v1/expenses`, 
                     'POST',
                     JSON.stringify({
                         userId: auth.userId

@@ -57,8 +57,9 @@ export default function Auth(){
         if(isLoginMode){
             // login existing user
             try{
+                console.log(process.env.REACT_APP_BACKEND_URL);
                 const responseData = await sendRequest(
-                    'http://localhost:5000/api/v1/users/login', 
+                    `${process.env.REACT_APP_BACKEND_URL}api/v1/users/login`, 
                     'POST', 
                     JSON.stringify({
                         email: formState.inputs.email.value,
@@ -77,7 +78,7 @@ export default function Auth(){
             // signing a new user:
             try{
                 const responseData = await sendRequest(
-                    'http://localhost:5000/api/v1/users/signup', 
+                    `${process.env.REACT_APP_BACKEND_URL}api/v1/users/signup`, 
                     'POST',
                     JSON.stringify({
                         name: formState.inputs.name.value,

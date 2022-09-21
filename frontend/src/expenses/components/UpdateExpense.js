@@ -79,7 +79,7 @@ export default function UpdateExpense(props){
     useEffect(() => {
         (async() => {
             const responseData = await sendRequest(
-                'http://localhost:5000/api/v1/expenses/getExpense',
+                `${process.env.REACT_APP_BACKEND_URL}api/v1/expenses/getExpense`,
                 'POST',
                 JSON.stringify({
                     userId: auth.userId,
@@ -175,7 +175,7 @@ export default function UpdateExpense(props){
         // TODO post request to backend
         try{
             await sendRequest(
-                'http://localhost:5000/api/v1/expenses/update',
+                `${process.env.REACT_APP_BACKEND_URL}api/v1/expenses/update`,
                 'PUT',
                 JSON.stringify({
                     userId: auth.userId,

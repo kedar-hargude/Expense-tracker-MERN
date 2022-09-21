@@ -63,7 +63,7 @@ export default function ExpenseItem(props){
             //         'Authorization': 'Bearer ' + auth.token
             //     }
             // );
-            await fetch('http://localhost:5000/api/v1/expenses/delete', {
+            await fetch(`${process.env.REACT_APP_BACKEND_URL}api/v1/expenses/delete`, {
                 method: 'DELETE',
                 body: JSON.stringify({
                     userId: auth.userId,

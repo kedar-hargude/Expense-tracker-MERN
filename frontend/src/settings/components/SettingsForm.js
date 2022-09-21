@@ -81,7 +81,7 @@ export default function SettingsForm(props){
     useEffect(() => {
         (async() => {
             const responseData = await sendRequest(
-                'http://localhost:5000/api/v1/users/getUser',
+                `${process.env.REACT_APP_BACKEND_URL}api/v1/users/getUser`,
                 'POST',
                 JSON.stringify({
                     userId: auth.userId
@@ -212,7 +212,7 @@ export default function SettingsForm(props){
             }
 
             await sendRequest(
-                'http://localhost:5000/api/v1/users/update',
+                `${process.env.REACT_APP_BACKEND_URL}api/v1/users/update`,
                 'PUT',
                 JSON.stringify(requestBodyOptions),
                 {
