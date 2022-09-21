@@ -233,9 +233,7 @@ export default function SettingsForm(props){
 
     if(!loadedUser){
         return(
-            <div className="center">
-                No user found, sorry
-            </div>
+            <LoadingSpinner asOverlay />
         )
     }
 
