@@ -1,6 +1,6 @@
 
 .settings-form__container{
-    border: 3px solid blue;
+    /* border: 3px solid blue; */
     padding: 3rem;
     height: calc(100vh - 4rem);
 }

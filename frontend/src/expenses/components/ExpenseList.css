@@ -1,6 +1,6 @@
 
 .expense-list__container{
-    border: 4px solid brown;
+    /* border: 4px solid brown; */
     min-height: calc(100vh - 4rem);
     max-height: 100%;
 }
