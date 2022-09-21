@@ -49,7 +49,6 @@ export default function ExpenseItem(props){
     async function confirmDeleteHandler(){
         // {console.log(`Deleting id:${props.id}...`)}
         setShowDeleteConfirmModal(false);
-        // TODO delete request to backend
         try{
             // await sendRequest(
             //     'http://localhost:5000/api/v1/expenses/delete',
@@ -80,15 +79,6 @@ export default function ExpenseItem(props){
         
         // navigate('/', {replace: true});
     }
-
-    // {
-    //     id: 1234123,
-    //     title: 'Mobile phone',
-    //     amount: 1000,
-    //     recurring: false,
-    //     type: 'Mobile',
-    //     date: '2022-08-15'
-    // }
 
     return(
         <React.Fragment>

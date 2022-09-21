@@ -93,7 +93,6 @@ export default function Auth(){
             
         }
         
-        //TODO submit to backend, and different for login and signup
     }
 
 

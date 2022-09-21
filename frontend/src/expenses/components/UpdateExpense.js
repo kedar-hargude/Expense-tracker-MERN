@@ -10,34 +10,6 @@ import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import "./ExpenseForm.css";
 
-
-// const DUMMY_EXPENSE_DATA = [
-//     {
-//         id: 1234123,
-//         title: 'Mobile phone',
-//         amount: 1000,
-//         recurring: false,
-//         type: 'Mobile',
-//         date: '2022-08-15'
-//     },
-//     {
-//         id: 23462456,
-//         title: 'Scrimba subscription',
-//         amount: 100,
-//         recurring: true,
-//         type: 'Entertainment',
-//         date: '2022-08-15'
-//     },
-//     {
-//         id: 23452345234523452345234523,
-//         title: 'Frontend Masters subscription',
-//         amount: 100,
-//         recurring: true,
-//         type: 'Entertainment',
-//         date: '2022-08-15' 
-//     }
-// ];
-
 // pass on the id to the UpdateExpense props...pass on value as a number in an object
 export default function UpdateExpense(props){
 
@@ -73,8 +45,6 @@ export default function UpdateExpense(props){
     false
     );
 
-
-    // const identifiedExpense = DUMMY_EXPENSE_DATA.find(ele => ele.id === props.expenseId);
 
     useEffect(() => {
         (async() => {
@@ -121,51 +91,13 @@ export default function UpdateExpense(props){
         })()
     }, [sendRequest, props.expenseId, setInitialFormData]);
 
-    // useEffect(()=> {
-    //     if(identifiedExpense){
-    //         setInitialFormData({
-    //             title: {
-    //                 value: identifiedExpense.title,
-    //                 isValid: true
-    //             },
-    //             amount: {
-    //                 value: identifiedExpense.amount,
-    //                 isValid: true
-    //             },
-    //             type: {
-    //                 value: identifiedExpense.type,
-    //                 isValid: true
-    //             },
-    //             date: {
-    //                 value: identifiedExpense.date,
-    //                 isValid: true
-    //             },
-    //             recurring: {
-    //                 isRecurring: identifiedExpense.recurring,
-    //                 isValid: true
-    //             }
-    //         }, 
-    //         true);
-    //     }
-
-    //     setIsLoading(false);
-    // }, [setInitialFormData, identifiedExpense])
 
     if(!loadedExpense && !error){
         return(
-            <div className="center">
-                No expense found, sorry
-            </div>
+            <LoadingSpinner asOverlay />
         )
     }
 
-    // if(isLoading){
-    //     return (
-    //         <div className="center">
-    //             <h2>Loading...</h2>
-    //         </div>
-    //     )
-    // }
 
     async function expenseUpdateFormSubmit(event){
         event.preventDefault();

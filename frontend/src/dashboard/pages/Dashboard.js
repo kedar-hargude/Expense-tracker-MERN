@@ -58,18 +58,12 @@ export default function Dashboard(){
         });
 
         const now = new Date();
-        // console.log(now);
-        // console.log(now.getFullYear());
-        // console.log(now.getMonth());
-        // console.log(now.getDate());
 
         function compareYear(checkDate){
             return now.getFullYear().toString().padStart(2, '0') === checkDate.split('T')[0].split('-')[0]; 
         }
         
         function compareMonth(checkDate){
-            // console.log((now.getMonth() + 1).toString().padStart(2, '0'));
-            // console.log(checkDate.split('T')[0].split('-')[1]);
             return (now.getMonth() + 1).toString().padStart(2, '0') === checkDate.split('T')[0].split('-')[1]; 
         }
         

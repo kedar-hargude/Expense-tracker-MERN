@@ -333,11 +333,8 @@ export default function SettingsForm(props){
                 {passwordError && <p className="error">Ensure that both passwords are same!</p>}
             <Button 
                         type='submit'
-                        // onClick={settingsFormSubmitHandler}
                         disabled={false}
-                        // disabled={!formState.isValid}
                         green
-                        // width='12%'
                     >Update
                 </Button>
                 

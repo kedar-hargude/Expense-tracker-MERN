@@ -84,7 +84,7 @@ export default function Expense(){
         })();
     }, [pageReloader]);
 
-    // // TODO sort arrays in backend, learn and use js date everything
+    
     let items;
     if(loadedUserData){
         // items = [...loadedUserData.userData.expenses];
@@ -101,13 +101,6 @@ export default function Expense(){
             }
         });
     }
-    // if(loadedUserData){
-    //     items = loadedUserData.data.expenses.map(expense => ({
-    //         ...expense,
-    //         date: expense.date
-    //         // date: expense.date.toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})
-    //     }))
-    // }
 
     // to reload all the expenses on the page on create, update or delete an expense
     const reloadPage = useCallback(() => {
