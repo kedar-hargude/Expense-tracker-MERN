@@ -24,12 +24,13 @@ app.use(cors());
 //     next();
 // })
 
-app.use('/', (req, res, next) => {
-    res.send('<h1>Home</h1>');
-})
 
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/expenses', expenseRouter);
+
+app.use('/', (req, res, next) => {
+    res.send('<h1>Home</h1>');
+})
 
 // unhandled routes
 app.all('*', (req, res, next) => {
