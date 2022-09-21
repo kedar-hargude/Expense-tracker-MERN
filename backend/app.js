@@ -28,10 +28,6 @@ app.use(cors());
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/expenses', expenseRouter);
 
-app.use('/', (req, res, next) => {
-    res.send('<h1>Home</h1>');
-})
-
 // unhandled routes
 app.all('*', (req, res, next) => {
     next(new CustomError(404, `Can't find ${req.originalUrl} on this server!`));
