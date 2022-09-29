@@ -97,11 +97,17 @@ This is dedicated to setting the software up
 <!-- INSTALLATION -->
 ### Installation
 
-For both frontend and backend, `cd` into the respective folder and execute `npm i` on the terminal to install all the dependencies.
+Frontend:
 
-Then, for frontend, execute `npm start` to open the project in browser localhost:3000.
+`cd` into the 'frontend' folder and execute `npm i` on the terminal to install all the dependencies.
 
-For backend, execute `nodemon server.js` to start the server on the port specified in the config.env file(which you can change for local use).
+Then, execute `npm start` to open the project in browser @localhost:3000.
+
+Backend:
+
+`cd` into the 'backend' folder and execute `npm i` on the terminal to install all the dependencies.
+
+Execute `nodemon server.js` to start the server on the port specified in the config.env file(which you can change for local use).
 
 ----------
 
@@ -117,13 +123,6 @@ Contributions are what make the open source community such an amazing place to b
 5. Open a Pull Request
 
 ----------
-
-<!-- contact -->
-## Contact
-
-Email,
-
-- Kedar Hargude, hargude481@gmail.com
 
 # Todo
 
