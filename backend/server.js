@@ -13,47 +13,6 @@ mongoose
     })
 
 
-// const newUser = new User({
-//     name: 'Kedar',
-//     lastName: "Hargude",
-//     email: "GABBARsingh208@gmail.com",
-//     password: "abcd123",
-//     expenses: [{
-//         "title": "Mobile phone",
-//         "amount": 1000,
-//         "recurring": false,
-//         "type": "Mobile",
-//         "date": "2022-08-15"
-//     }]
-// })
-
-// newUser
-//     .save()
-//     .then(doc => console.log(doc))
-//     .catch(err => console.log("Error here na: " + err))
-
-const newExpense = new Expense({
-    "title": "Scrimba subscription",
-    "amount": 100,
-    "recurring": true,
-    "type": "Entertainment",
-    "date": "2022-08-15"
-})
-
-const userId = '6307cf31953f148420bca1a3'; // in Atlas cloud
-// const userId = '6307cf31953f148420bca1a3'; // local string url
-const expenseId = '6307cf31953f148420bca1a4'; // locally
-// User.findById(userId, (err, resultUser) => {
-//     if(err){
-//         console.log("Error finding by id: " + err);
-//     } else {
-//         // newExpense.save();
-//         resultUser.expenses = resultUser.expenses.filter(ele => ele.id !== expenseId);
-//         resultUser.save();
-//         // console.log("Found: " + result);
-//     }
-// })
-
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`App has started listening on port ${port}`)
