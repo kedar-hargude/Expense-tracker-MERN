@@ -16,7 +16,7 @@
 
 ----------
 
-### Link to webapp: [Click here](expense-tracker-kbh.onrender.com/)
+### Link to webapp: [Click here](https://expense-tracker-kbh.onrender.com/)
 
 ----------
 
